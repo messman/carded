@@ -1,0 +1,11 @@
+{
+  "name": "agm-carded",
+  "version": "1.0.0",
+  "description": "A tool for creating poker-sized card deck templates with song lyrics and Spotify links.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andrew Messier",
+  "license": "UNLICENSED"
+}
