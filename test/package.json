@@ -8,7 +8,7 @@
 		"start": "node ./dist/index",
 		"build": "npm run clean && tsc",
 		"build-start": "npm run build && npm start",
-		"clean": "trash dist"
+		"clean": "trash dist && trash out"
 	},
 	"author": "Andrew Messier",
 	"license": "MIT",

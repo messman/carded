@@ -15,5 +15,8 @@
 		"@messman/ts-webpack-builder": "^1.5.2",
 		"trash-cli": "^3.1.0",
 		"typescript": "^4.1.2"
+	},
+	"dependencies": {
+		"canvas": "^2.6.1"
 	}
 }

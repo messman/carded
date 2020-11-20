@@ -10,6 +10,8 @@ build
 design
 npm-debug.log
 
+test/out
+
 **/test/**/*.js
 **/test/**/*.js.map
 
