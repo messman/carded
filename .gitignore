@@ -1,0 +1,24 @@
+# root
+TODO.txt
+NOTES.txt
+deploy-*.txt
+
+node_modules
+dist
+dist-client
+build
+design
+npm-debug.log
+
+**/test/**/*.js
+**/test/**/*.js.map
+
+**/ts-build
+
+# Output of 'npm pack'
+*.tgz
+
+# OS X temporary files
+.DS_Store
+
+settings.*.json
