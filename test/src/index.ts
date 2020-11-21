@@ -25,8 +25,8 @@ process({
 				]
 			}
 		],
-		width: 500,
-		height: 500,
+		width: 816,
+		height: 1110,
 	},
 	designer: null
 });

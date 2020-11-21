@@ -1,5 +1,6 @@
+import { loadImage } from 'canvas';
 import { Card, CardDesign, CardDesigner, CardOutput, CardOutputStatus, Deck, Options, Rank, Suit } from '../../options/models';
-import { create, getContext } from '../../services/canvas';
+import { cardConstants, create, getContext } from '../../services/canvas';
 import * as path from 'path';
 import { exportCanvasToPNG } from '../../services/export';
 
@@ -34,10 +35,7 @@ async function drawCard(options: Options<EmptyCardDesign>, deck: Deck<EmptyCardD
 	const { outputAbsoluteDirectory, outputDeckPrefix } = deck;
 	const { rank, suit } = card;
 
-	const canvas = create({
-		width: width,
-		height: height
-	});
+	const canvas = create();
 	const ctx = getContext(canvas);
 
 	ctx.font = '20px Arial';
@@ -51,5 +49,7 @@ async function drawCard(options: Options<EmptyCardDesign>, deck: Deck<EmptyCardD
 	const fileName = `${outputDeckPrefix}${title}.png`;
 	const outputFileName = path.join(outputAbsoluteDirectory, fileName);
 
+	const img = await loadImage(Buffer.from(cardConstants.icons.heart, 'utf-8'));
+	ctx.drawImage(img, 100, 100, 23, 23); // CHANGE
 	await exportCanvasToPNG(canvas, outputFileName);
 }
