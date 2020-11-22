@@ -27,22 +27,23 @@ const rankIcons: Record<keyof typeof Rank, string> = {
 	king: require('@/static/icons/rank-king.svg').default as string
 };
 
+// 300 DPI, 2.74 by 3.74
+const fullArea = {
+	width: 822,
+	height: 1122
+};
+const printSeparation = 72;
+
 // Eventually these constants could be made customizable.
 export const cardConstants = {
-	designArea: {
-		// 300 DPI, 2.28 * 3.27 in
-		width: 684,
-		height: 981
-	},
+	fullArea: fullArea,
 	cutArea: {
-		// 300 DPI, 2.48 * 3.46 in
-		width: 744,
-		height: 1038
+		width: fullArea.width - printSeparation,
+		height: fullArea.height - printSeparation
 	},
-	fullArea: {
-		// 300 DPI, 2.72 * 3.7 in
-		width: 816,
-		height: 1110
+	designArea: {
+		width: fullArea.width - (printSeparation * 2),
+		height: fullArea.height - (printSeparation * 2)
 	},
 	backgroundColor: '#FCFCFA',
 	blackColor: '#111111',

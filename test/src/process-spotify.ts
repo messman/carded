@@ -11,13 +11,17 @@ export function getSpotifyOptions(): Options<SpotifyCardDesign> {
 				cards: [
 					{
 						rank: Rank.ace,
-						suit: Suit.clubs,
+						suit: Suit.spades,
 						design: {
-							artist: 'Queen',
-							lyrics: ['v'],
-							spotifyUri: '',
-							geniusLink: '',
-							year: 1999
+							artist: 'The Doobie Brothers',
+							song: 'Listen To The Music',
+							lyrics: [
+								'What the people need is a way to make them smile',
+								`It ain't so hard to do if you know how`,
+							],
+							spotifyUri: 'spotify:track:7Ar4G7Ci11gpt6sfH9Cgz5',
+							geniusLink: 'https://genius.com/The-doobie-brothers-listen-to-the-music-lyrics',
+							year: 1972
 						}
 					},
 					{
@@ -25,7 +29,8 @@ export function getSpotifyOptions(): Options<SpotifyCardDesign> {
 						suit: Suit.none,
 						design: {
 							artist: 'Queen',
-							lyrics: ['v'],
+							song: '',
+							lyrics: [''],
 							spotifyUri: '',
 							geniusLink: '',
 							year: 1999
@@ -36,7 +41,8 @@ export function getSpotifyOptions(): Options<SpotifyCardDesign> {
 						suit: Suit.hearts,
 						design: {
 							artist: 'Queen',
-							lyrics: ['v'],
+							song: '',
+							lyrics: [''],
 							spotifyUri: '',
 							geniusLink: '',
 							year: 1999
@@ -47,7 +53,8 @@ export function getSpotifyOptions(): Options<SpotifyCardDesign> {
 						suit: Suit.spades,
 						design: {
 							artist: 'Queen',
-							lyrics: ['v'],
+							song: '',
+							lyrics: [''],
 							spotifyUri: '',
 							geniusLink: '',
 							year: 1999
@@ -58,7 +65,8 @@ export function getSpotifyOptions(): Options<SpotifyCardDesign> {
 						suit: Suit.diamonds,
 						design: {
 							artist: 'Queen',
-							lyrics: ['v'],
+							song: '',
+							lyrics: [''],
 							spotifyUri: '',
 							geniusLink: '',
 							year: 1999
@@ -70,3 +78,18 @@ export function getSpotifyOptions(): Options<SpotifyCardDesign> {
 		designer: spotifyCardDesigner
 	};
 }
+
+// function createCard(rank: Rank, suit: Suit, artist: string, year: number, design: { song: string, uri: string, genius: string, lyrics: string[]; }): Card<SpotifyCardDesign> {
+// 	return {
+// 		rank: rank,
+// 		suit: suit,
+// 		design: {
+// 			artist: artist,
+// 			year: year,
+// 			song: design.song,
+// 			spotifyUri: design.uri,
+// 			geniusLink: design.genius,
+// 			lyrics: design.lyrics,
+// 		}
+// 	};
+// }
