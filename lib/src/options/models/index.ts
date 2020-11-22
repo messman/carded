@@ -1,7 +1,9 @@
+import { Canvas, CanvasRenderingContext2D } from 'canvas';
+
 export interface Options<CD extends CardDesign> {
-	width: number;
-	height: number;
+	isDevelopment?: boolean;
 	decks: Deck<CD>[];
+	designer: CardDesigner<CD> | null;
 }
 
 export interface Deck<CD extends CardDesign> {
@@ -28,10 +30,11 @@ export enum Rank {
 }
 
 export enum Suit {
-	spade,
-	club,
-	heart,
-	diamond
+	none,
+	spades,
+	clubs,
+	hearts,
+	diamonds
 }
 
 export interface RankSuit {
@@ -47,8 +50,16 @@ export interface CardDesign {
 	debug?: string;
 }
 
+export interface ProcessCardInput<CD extends CardDesign> {
+	options: Options<CD>;
+	deck: Deck<CD>;
+	card: Card<CD>;
+	canvas: Canvas;
+	context: CanvasRenderingContext2D;
+}
+
 export interface CardDesigner<CD extends CardDesign> {
-	processDeck(options: Options<CD>, deck: Deck<CD>): Promise<DeckOutput<CD>>;
+	processCard(input: ProcessCardInput<CD>): Promise<ProcessCardOutput<CD>>;
 }
 
 export enum CardOutputStatus {
@@ -58,11 +69,7 @@ export enum CardOutputStatus {
 	error
 }
 
-export interface CardOutput<CD extends CardDesign> extends Card<CD> {
+export interface ProcessCardOutput<CD extends CardDesign> extends Card<CD> {
 	outputStatus: CardOutputStatus;
 	outputStatusMessage?: string | null;
-}
-
-export interface DeckOutput<CD extends CardDesign> {
-	cards: CardOutput<CD>[];
 }

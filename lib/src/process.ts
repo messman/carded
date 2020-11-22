@@ -1,38 +1,57 @@
 import { emptyCardDesigner } from './designers/empty';
-import { CardDesign, CardDesigner, DeckOutput, Options } from './options/models';
+import { CardDesign, CardDesigner, ProcessCardOutput, Options, Deck, Card, Rank, Suit } from './options/models';
+import { create } from './services/canvas';
 import { log } from './services/log';
-
-export interface ProcessInput<CD extends CardDesign = any> {
-	isDevelopment?: boolean;
-	isCachingOptions?: boolean;
-	calculateOutput?: boolean;
-	options: Options<CD>;
-	designer: CardDesigner<CD> | null;
-}
+import * as path from 'path';
+import { exportCanvasToPNG } from './services/export';
+import { drawBasicCard } from './services/canvas/card';
 
 export interface ProcessOutput<CD extends CardDesign = any> {
-	deckOutput: DeckOutput<CD>[];
+	decks: ProcessCardOutput<CD>[][];
 }
 
-export async function process<CD extends CardDesign = any>(input: ProcessInput<CD>): Promise<ProcessOutput<CD> | null> {
-	const { isDevelopment, calculateOutput, designer, options } = input;
+export async function process<CD extends CardDesign = any>(options: Options<CD>): Promise<ProcessOutput<CD>> {
+	const { isDevelopment, decks, designer } = options;
 
 	if (isDevelopment) {
 		log('process - dev mode');
 	}
 
-	const cardDesigner = designer || emptyCardDesigner;
+	const cardDesigner = designer || (emptyCardDesigner as unknown as CardDesigner<CD>);
 
-	const { decks } = options;
 	for (let i = 0; i < decks.length; i++) {
 		const deck = decks[i];
-		await cardDesigner.processDeck(options, deck);
+		const { cards } = deck;
+		for (let j = 0; j < cards.length; j++) {
+			const card = cards[j];
+			processCard(cardDesigner, options, deck, card);
+		}
 	}
 
-	if (calculateOutput) {
-		return {
-			deckOutput: []
-		};
-	}
-	return null;
+	return {
+		decks: []
+	};
+}
+
+async function processCard<CD extends CardDesign>(designer: CardDesigner<CD>, options: Options<CD>, deck: Deck<CD>, card: Card<CD>): Promise<void> {
+	const { isDevelopment } = options;
+	const { outputDeckPrefix, outputAbsoluteDirectory } = deck;
+	const { rank, suit } = card;
+
+	const [canvas, ctx] = create();
+
+	drawBasicCard(!!isDevelopment, card, ctx);
+
+	designer.processCard({
+		options: options,
+		deck: deck,
+		card: card,
+		canvas: canvas,
+		context: ctx
+	});
+
+	const title = `${Rank[rank]}_${Suit[suit]}`;
+	const fileName = `${outputDeckPrefix}${title}.png`;
+	const outputFileName = path.join(outputAbsoluteDirectory, fileName);
+	await exportCanvasToPNG(canvas, outputFileName);
 }
