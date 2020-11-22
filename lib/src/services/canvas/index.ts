@@ -11,6 +11,7 @@ export function setFont(context: CanvasRenderingContext2D, size: number, font: s
 }
 
 export function drawImageWithColor(context: CanvasRenderingContext2D, image: Image, color: string, x: number, y: number, w: number, h: number): void {
+	// https://stackoverflow.com/q/45187291
 	context.save();
 	context.globalCompositeOperation = 'source-over';
 	context.drawImage(image, x, y, w, h);

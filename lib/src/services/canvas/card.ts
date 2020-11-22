@@ -34,6 +34,7 @@ export interface Size {
 
 export interface CardConstants {
 	designArea: Size;
+	cutArea: Size;
 	fullArea: Size;
 	backgroundColor: string;
 	blackColor: string;
@@ -52,6 +53,11 @@ export const cardConstants: CardConstants = {
 		width: 684,
 		height: 981
 	},
+	cutArea: {
+		// 300 DPI, 2.48 * 3.46 in
+		width: 744,
+		height: 1038
+	},
 	fullArea: {
 		// 300 DPI, 2.72 * 3.7 in
 		width: 816,
@@ -61,15 +67,15 @@ export const cardConstants: CardConstants = {
 	blackColor: '#111111',
 	redColor: '#9D1919',
 	font: 'Futura',
-	rankWidth: 80,
-	suitWidth: 80,
+	rankWidth: 110,
+	suitWidth: 85,
 	iconHeightFactor: 1,
-	iconJokerHeightFactor: 4.75,
+	iconJokerHeightFactor: 4.25,
 };
 
 export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx: CanvasRenderingContext2D): Promise<void> {
 	const { rank, suit } = card;
-	const { rankWidth, suitWidth, backgroundColor, fullArea, designArea, iconHeightFactor, iconJokerHeightFactor } = cardConstants;
+	const { rankWidth, suitWidth, backgroundColor, fullArea, designArea, cutArea, iconHeightFactor, iconJokerHeightFactor } = cardConstants;
 
 	// Fill with background color
 	ctx.fillStyle = backgroundColor;
@@ -81,67 +87,59 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 
 	if (isDevelopment) {
 		// Draw design area line
-		ctx.strokeStyle = '#000000';
+		ctx.strokeStyle = '#cccccc';
 		ctx.strokeRect(designOffsetX, designOffsetY, designArea.width, designArea.height);
+
+		// Draw cut area line
+		ctx.strokeStyle = '#000000';
+		const cutOffsetX = (fullArea.width - cutArea.width) / 2;
+		const cutOffsetY = (fullArea.height - cutArea.height) / 2;
+		ctx.strokeRect(cutOffsetX, cutOffsetY, cutArea.width, cutArea.height);
 	}
 
-	// Apply color
-	// https://stackoverflow.com/q/45187291
 	const suitFillColor = getSuitFillColor(suit);
 
 	const rankIcon = rankIcons[Rank[rank] as keyof typeof Rank];
 	const rankIconImage = await loadImage(Buffer.from(rankIcon, 'utf-8'));
 	const rankIconImageHeightFactor = rank === Rank.joker ? iconJokerHeightFactor : iconHeightFactor;
-	const rankOffsetX = designOffsetX + 20;
+	const rankOffsetX = designOffsetX;
 	const rankOffsetY = designOffsetY + 20;
+	const rankHeight = rankWidth * rankIconImageHeightFactor;
 
 	const suitIcon = suitIcons[Suit[suit] as keyof typeof Suit];
 	let suitIconImage: Image | null = null;
+	let suitOffsetX: number = 0;
+	let suitOffsetY: number = 0;
 	if (suitIcon) {
 		suitIconImage = await loadImage(Buffer.from(suitIcon, 'utf-8'));
+		// Suit may be a different size. Make sure it is still centered beneath rank.
+		const rankToSuitOffset = (rankWidth - suitWidth) / 2;
+		suitOffsetX = rankOffsetX + rankToSuitOffset;
+		suitOffsetY = rankOffsetY + rankToSuitOffset + rankHeight + 10;
 	}
 
 	function drawRankAndSuit() {
-		const rankHeight = rankWidth * rankIconImageHeightFactor;
 		drawImageWithColor(ctx, rankIconImage, suitFillColor, rankOffsetX, rankOffsetY, rankWidth, rankHeight);
 		if (suitIconImage) {
-			const suitOffsetX = rankOffsetX;
-			const suitOffsetY = rankOffsetY + rankHeight + 10;
 			drawImageWithColor(ctx, suitIconImage, suitFillColor, suitOffsetX, suitOffsetY, suitWidth, suitWidth);
 		}
 
-		if (isDevelopment) {
-			ctx.save();
-			ctx.globalAlpha = .2;
-			ctx.fillStyle = 'blue';
-			ctx.fillRect(rankOffsetX, rankOffsetY, rankWidth, rankWidth * 3);
-			ctx.restore();
-		}
+		// if (isDevelopment) {
+		// 	ctx.save();
+		// 	ctx.globalAlpha = .2;
+		// 	ctx.fillStyle = 'blue';
+		// 	ctx.fillRect(rankOffsetX, rankOffsetY, rankWidth, rankWidth * 3);
+		// 	ctx.restore();
+		// }
 	}
 
-	drawRankAndSuit();
-
 	ctx.save();
-	// ctx.translate(middle.x, middle.y);
-	// const rotation = (((blockRotation + blockRotation + blockRotationNext) / 2) - (Math.PI / 2)) % (TWO_PI)
-	// ctx.rotate(rotation);
-	// ctx.translate(0, radius);
-	// ctx.fillStyle = colors.canvas;
-	// ctx.font = `bold ${Math.min(distance, ringRadius) / 2}px "Courier New", "Courier", monospace`;
-	// ctx.textAlign = "center";
-	// ctx.textBaseline = "middle";
-	// ctx.fillText(value, 0, -ringRadius / 2);
+	drawRankAndSuit();
+	ctx.translate(fullArea.width / 2, fullArea.height / 2);
+	ctx.rotate(Math.PI);
+	ctx.translate(- fullArea.width / 2, - fullArea.height / 2);
+	drawRankAndSuit();
 	ctx.restore();
-
-
-	ctx.font = '20px Arial';
-
-	ctx.textBaseline = 'middle';
-	ctx.textAlign = 'center';
-
-	const title = `${Rank[rank]}_${Suit[suit]}`;
-	ctx.fillStyle = getSuitFillColor(suit);
-	ctx.fillText(title, cardConstants.designArea.width / 2, cardConstants.designArea.height / 2);
 }
 
 export function getSuitFillColor(suit: Suit): string {
