@@ -27,27 +27,8 @@ const rankIcons: Record<keyof typeof Rank, string> = {
 	king: require('@/static/icons/rank-king.svg').default as string
 };
 
-export interface Size {
-	width: number;
-	height: number;
-}
-
-export interface CardConstants {
-	designArea: Size;
-	cutArea: Size;
-	fullArea: Size;
-	backgroundColor: string;
-	blackColor: string;
-	redColor: string;
-	font: string;
-	rankWidth: number;
-	suitWidth: number;
-	iconHeightFactor: number;
-	iconJokerHeightFactor: number;
-}
-
-// Eventually this would be made customizable.
-export const cardConstants: CardConstants = {
+// Eventually these constants could be made customizable.
+export const cardConstants = {
 	designArea: {
 		// 300 DPI, 2.28 * 3.27 in
 		width: 684,
@@ -68,14 +49,16 @@ export const cardConstants: CardConstants = {
 	redColor: '#9D1919',
 	font: 'Futura',
 	rankWidth: 110,
+	rankHeightOffset: 20,
 	suitWidth: 85,
+	suitHeightOffset: 20,
 	iconHeightFactor: 1,
 	iconJokerHeightFactor: 4.25,
 };
 
 export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx: CanvasRenderingContext2D): Promise<void> {
 	const { rank, suit } = card;
-	const { rankWidth, suitWidth, backgroundColor, fullArea, designArea, cutArea, iconHeightFactor, iconJokerHeightFactor } = cardConstants;
+	const { suitHeightOffset, rankHeightOffset, rankWidth, suitWidth, backgroundColor, fullArea, designArea, cutArea, iconHeightFactor, iconJokerHeightFactor } = cardConstants;
 
 	// Fill with background color
 	ctx.fillStyle = backgroundColor;
@@ -97,15 +80,18 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 		ctx.strokeRect(cutOffsetX, cutOffsetY, cutArea.width, cutArea.height);
 	}
 
+	// Get either red or black color.
 	const suitFillColor = getSuitFillColor(suit);
 
+	// Compute all the rank positioning and size.
 	const rankIcon = rankIcons[Rank[rank] as keyof typeof Rank];
 	const rankIconImage = await loadImage(Buffer.from(rankIcon, 'utf-8'));
 	const rankIconImageHeightFactor = rank === Rank.joker ? iconJokerHeightFactor : iconHeightFactor;
 	const rankOffsetX = designOffsetX;
-	const rankOffsetY = designOffsetY + 20;
+	const rankOffsetY = designOffsetY + rankHeightOffset;
 	const rankHeight = rankWidth * rankIconImageHeightFactor;
 
+	// Compute all the suit positioning and size.
 	const suitIcon = suitIcons[Suit[suit] as keyof typeof Suit];
 	let suitIconImage: Image | null = null;
 	let suitOffsetX: number = 0;
@@ -115,7 +101,7 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 		// Suit may be a different size. Make sure it is still centered beneath rank.
 		const rankToSuitOffset = (rankWidth - suitWidth) / 2;
 		suitOffsetX = rankOffsetX + rankToSuitOffset;
-		suitOffsetY = rankOffsetY + rankToSuitOffset + rankHeight + 10;
+		suitOffsetY = rankOffsetY + rankToSuitOffset + rankHeight + suitHeightOffset;
 	}
 
 	function drawRankAndSuit() {
@@ -123,21 +109,16 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 		if (suitIconImage) {
 			drawImageWithColor(ctx, suitIconImage, suitFillColor, suitOffsetX, suitOffsetY, suitWidth, suitWidth);
 		}
-
-		// if (isDevelopment) {
-		// 	ctx.save();
-		// 	ctx.globalAlpha = .2;
-		// 	ctx.fillStyle = 'blue';
-		// 	ctx.fillRect(rankOffsetX, rankOffsetY, rankWidth, rankWidth * 3);
-		// 	ctx.restore();
-		// }
 	}
 
+	// Draw in top-left, then rotate and draw again.
 	ctx.save();
 	drawRankAndSuit();
-	ctx.translate(fullArea.width / 2, fullArea.height / 2);
+	const centerX = fullArea.width / 2;
+	const centerY = fullArea.height / 2;
+	ctx.translate(centerX, centerY);
 	ctx.rotate(Math.PI);
-	ctx.translate(- fullArea.width / 2, - fullArea.height / 2);
+	ctx.translate(-centerX, -centerY);
 	drawRankAndSuit();
 	ctx.restore();
 }

@@ -1,4 +1,4 @@
-import { CardDesign, CardDesigner, CardOutputStatus } from '@/options/models';
+import { CardDesign, CardDesigner, CardOutputStatus } from '../../options/models';
 
 export interface EmptyCardDesign extends CardDesign {
 	// none
