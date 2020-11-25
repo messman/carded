@@ -49,10 +49,10 @@ export const cardConstants = {
 	blackColor: '#111111',
 	redColor: '#9D1919',
 	font: 'Futura',
-	rankWidth: 110,
+	rankWidth: 90,
 	rankHeightOffset: 20,
-	suitWidth: 85,
-	suitHeightOffset: 20,
+	suitWidth: 90,
+	suitHeightOffset: 10,
 	iconHeightFactor: 1,
 	iconJokerHeightFactor: 4.25,
 };

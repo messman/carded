@@ -1,13 +1,11 @@
-import carded = require('@messman/carded');
-const { process } = carded;
-import { getEmptyOptions } from './process-empty';
-import { getSpotifyOptions } from './process-spotify';
+import { processEmpty } from './process-empty';
+import { processSpotify } from './process-spotify';
 
 const useProcessEmpty = false;
 
 if (useProcessEmpty) {
-	process(getEmptyOptions());
+	processEmpty();
 }
 else {
-	process(getSpotifyOptions());
+	processSpotify();
 }

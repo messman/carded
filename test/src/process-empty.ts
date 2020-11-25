@@ -1,8 +1,9 @@
-import { EmptyCardDesign, Options, Rank, Suit } from '@messman/carded';
+import { EmptyCardDesign, Options, process, Rank, Suit } from '@messman/carded';
 import * as path from 'path';
+import { processDeckOutput } from './log-output';
 
-export function getEmptyOptions(): Options<EmptyCardDesign> {
-	return {
+export async function processEmpty(): Promise<void> {
+	const options: Options<EmptyCardDesign> = {
 		isDevelopment: true,
 		decks: [
 			{
@@ -39,4 +40,9 @@ export function getEmptyOptions(): Options<EmptyCardDesign> {
 		],
 		designer: null
 	};
+
+	const output = await process(options);
+	output.decks.forEach((deck, index) => {
+		processDeckOutput(index, deck);
+	});
 }

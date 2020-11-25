@@ -40,6 +40,7 @@ export enum Suit {
 export interface RankSuit {
 	rank: Rank;
 	suit: Suit;
+	skip?: boolean;
 }
 
 export interface Card<CD extends CardDesign> extends RankSuit {
@@ -65,7 +66,7 @@ export interface CardDesigner<CD extends CardDesign> {
 export enum CardOutputStatus {
 	ok,
 	duplicate,
-	unspecified,
+	skipped,
 	error
 }
 

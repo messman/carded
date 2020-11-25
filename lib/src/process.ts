@@ -1,5 +1,5 @@
 import { emptyCardDesigner } from './designers/empty';
-import { CardDesign, CardDesigner, ProcessCardOutput, Options, Deck, Card, Rank, Suit } from './options/models';
+import { CardDesign, CardDesigner, ProcessCardOutput, Options, Deck, Card, Rank, Suit, CardOutputStatus } from './options/models';
 import { create } from './services/canvas';
 import { log } from './services/log';
 import * as path from 'path';
@@ -18,31 +18,42 @@ export async function process<CD extends CardDesign = any>(options: Options<CD>)
 	}
 
 	const cardDesigner = designer || (emptyCardDesigner as unknown as CardDesigner<CD>);
+	const deckOutputs: ProcessCardOutput<CD>[][] = [];
 
 	for (let i = 0; i < decks.length; i++) {
 		const deck = decks[i];
+		const deckOutput: ProcessCardOutput<CD>[] = [];
 		const { cards } = deck;
 		for (let j = 0; j < cards.length; j++) {
 			const card = cards[j];
-			processCard(cardDesigner, options, deck, card);
+			const cardOutput = await processCard(cardDesigner, options, deck, card);
+			deckOutput.push(cardOutput);
 		}
+		deckOutputs.push(deckOutput);
 	}
 
 	return {
-		decks: []
+		decks: deckOutputs
 	};
 }
 
-async function processCard<CD extends CardDesign>(designer: CardDesigner<CD>, options: Options<CD>, deck: Deck<CD>, card: Card<CD>): Promise<void> {
+async function processCard<CD extends CardDesign>(designer: CardDesigner<CD>, options: Options<CD>, deck: Deck<CD>, card: Card<CD>): Promise<ProcessCardOutput<CD>> {
 	const { isDevelopment } = options;
 	const { outputDeckPrefix, outputAbsoluteDirectory } = deck;
-	const { rank, suit } = card;
+	const { rank, suit, skip } = card;
+
+	if (skip) {
+		return Promise.resolve({
+			...card,
+			outputStatus: CardOutputStatus.skipped
+		});
+	}
 
 	const [canvas, ctx] = create();
 
 	drawBasicCard(!!isDevelopment, card, ctx);
 
-	designer.processCard({
+	const output = await designer.processCard({
 		options: options,
 		deck: deck,
 		card: card,
@@ -50,8 +61,12 @@ async function processCard<CD extends CardDesign>(designer: CardDesigner<CD>, op
 		context: ctx
 	});
 
-	const title = `${Rank[rank]}_${Suit[suit]}`;
-	const fileName = `${outputDeckPrefix}${title}.png`;
-	const outputFileName = path.join(outputAbsoluteDirectory, fileName);
-	await exportCanvasToPNG(canvas, outputFileName);
+	if (output.outputStatus === CardOutputStatus.ok) {
+		const title = `${Rank[rank]}_${Suit[suit]}`;
+		const fileName = `${outputDeckPrefix}${title}.png`;
+		const outputFileName = path.join(outputAbsoluteDirectory, fileName);
+		await exportCanvasToPNG(canvas, outputFileName);
+	}
+
+	return output;
 }
