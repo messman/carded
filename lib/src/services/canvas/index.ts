@@ -7,13 +7,14 @@ export function create(): [Canvas, CanvasRenderingContext2D] {
 	return [canvas, canvas.getContext('2d')];
 }
 
-export function setFont(context: CanvasRenderingContext2D, size: number, font: string, style?: string): void {
-	const styleText = style ? `${style} ` : '';
-	registerFont('/Users/agm/Library/Fonts/BarlowCondensed-Medium.ttf', { family: 'Barlow Condensed' });
-	registerFont('/Users/agm/Library/Fonts/BarlowCondensed-Light.ttf', { family: 'Barlow Condensed' });
-	registerFont('/Users/agm/Library/Fonts/BarlowCondensed-Regular.ttf', { family: 'Barlow Condensed' });
-	context.font = `${styleText} ${size}px "${font}"`;
+registerFont('/Users/agm/Library/Fonts/BarlowCondensed-Regular.ttf', { family: 'Barlow Condensed Regular' });
+registerFont('/Users/agm/Library/Fonts/BarlowCondensed-Medium.ttf', { family: 'Barlow Condensed Medium' });
+registerFont('/Users/agm/Library/Fonts/BarlowCondensed-SemiBold.ttf', { family: 'Barlow Condensed SemiBold' });
 
+export function setFont(context: CanvasRenderingContext2D, size: number, font: string, style?: string | number): void {
+	const styleText = style ? `${style} ` : '';
+	context.font = `${styleText} ${size}px "${font}"`;
+	console.log(context.font);
 }
 
 export function drawImageWithColor(ctx: CanvasRenderingContext2D, image: Image, color: string, x: number, y: number, w: number, h: number): void {
