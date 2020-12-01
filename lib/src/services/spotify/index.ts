@@ -16,3 +16,9 @@ export async function loadSpotifyCode(input: LoadSpotifyCodeInput): Promise<Imag
 	const uri = `${uriPrefix}/${imageType}/${backgroundColor}/${foregroundColor}/${width}/${spotifyUri}`;
 	return await loadImage(uri);
 }
+
+const sampleCode = require('@/static/icons/sample-code.svg').default as string;
+const sampleBuffer = Buffer.from(sampleCode, 'utf-8');
+export async function loadSampleSpotifyCode(): Promise<Image> {
+	return await loadImage(sampleBuffer);
+}

@@ -7,7 +7,7 @@
 	"scripts": {
 		"build": "ts-webpack-builder configFile=tswb.js",
 		"build-production": "npm run clean && ts-webpack-builder configFile=tswb.js --isDevelopment=false",
-		"clean": "trash dist"
+		"clean": "trash dist/*"
 	},
 	"author": "Andrew Messier",
 	"license": "MIT",

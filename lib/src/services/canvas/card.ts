@@ -48,37 +48,46 @@ export const cardConstants = {
 	backgroundColor: '#FCFCFA',
 	blackColor: '#111111',
 	redColor: '#9D1919',
-	font: 'Futura',
+	font: 'Barlow Condensed',
 	rankWidth: 90,
+	rankHeight: 125,
+	jokerRankHeight: 540,
 	rankHeightOffset: 20,
 	suitWidth: 90,
+	suitHeight: 90,
 	suitHeightOffset: 10,
-	iconHeightFactor: 1,
-	iconJokerHeightFactor: 4.25,
+	scaleFactor: 2,
 };
 
 export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx: CanvasRenderingContext2D): Promise<void> {
 	const { rank, suit } = card;
-	const { suitHeightOffset, rankHeightOffset, rankWidth, suitWidth, backgroundColor, fullArea, designArea, cutArea, iconHeightFactor, iconJokerHeightFactor } = cardConstants;
+	const { scaleFactor, suitHeightOffset, rankHeightOffset, rankWidth, suitWidth, backgroundColor, fullArea, designArea, cutArea, jokerRankHeight, rankHeight, suitHeight } = cardConstants;
+
+	const scaledFullWidth = fullArea.width * scaleFactor;
+	const scaledFullHeight = fullArea.height * scaleFactor;
 
 	// Fill with background color
 	ctx.fillStyle = backgroundColor;
-	ctx.fillRect(0, 0, fullArea.width, fullArea.height);
+	ctx.fillRect(0, 0, scaledFullWidth, scaledFullHeight);
 
+	const scaledDesignWidth = designArea.width * scaleFactor;
+	const scaledDesignHeight = designArea.height * scaleFactor;
 	// Computer inner design area
-	const designOffsetX = (fullArea.width - designArea.width) / 2;
-	const designOffsetY = (fullArea.height - designArea.height) / 2;
+	const designOffsetX = (scaledFullWidth - scaledDesignWidth) / 2;
+	const designOffsetY = (scaledFullHeight - scaledDesignHeight) / 2;
 
 	if (isDevelopment) {
 		// Draw design area line
 		ctx.strokeStyle = '#cccccc';
-		ctx.strokeRect(designOffsetX, designOffsetY, designArea.width, designArea.height);
+		ctx.strokeRect(designOffsetX, designOffsetY, scaledDesignWidth, scaledDesignHeight);
 
 		// Draw cut area line
 		ctx.strokeStyle = '#000000';
-		const cutOffsetX = (fullArea.width - cutArea.width) / 2;
-		const cutOffsetY = (fullArea.height - cutArea.height) / 2;
-		ctx.strokeRect(cutOffsetX, cutOffsetY, cutArea.width, cutArea.height);
+		const scaledCutWidth = cutArea.width * scaleFactor;
+		const scaledCutHeight = cutArea.height * scaleFactor;
+		const cutOffsetX = (scaledFullWidth - scaledCutWidth) / 2;
+		const cutOffsetY = (scaledFullHeight - scaledCutHeight) / 2;
+		ctx.strokeRect(cutOffsetX, cutOffsetY, scaledCutWidth, scaledCutHeight);
 	}
 
 	// Get either red or black color.
@@ -87,36 +96,38 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 	// Compute all the rank positioning and size.
 	const rankIcon = rankIcons[Rank[rank] as keyof typeof Rank];
 	const rankIconImage = await loadImage(Buffer.from(rankIcon, 'utf-8'));
-	const rankIconImageHeightFactor = rank === Rank.joker ? iconJokerHeightFactor : iconHeightFactor;
 	const rankOffsetX = designOffsetX;
-	const rankOffsetY = designOffsetY + rankHeightOffset;
-	const rankHeight = rankWidth * rankIconImageHeightFactor;
+	const rankOffsetY = designOffsetY + (rankHeightOffset * scaleFactor);
+	const scaledRankWidth = rankWidth * scaleFactor;
+	const scaledRankHeight = (rank === Rank.joker ? jokerRankHeight : rankHeight) * scaleFactor;
 
 	// Compute all the suit positioning and size.
 	const suitIcon = suitIcons[Suit[suit] as keyof typeof Suit];
 	let suitIconImage: Image | null = null;
 	let suitOffsetX: number = 0;
 	let suitOffsetY: number = 0;
+	const scaledSuitWidth = suitWidth * scaleFactor;
+	const scaledSuitHeight = suitHeight * scaleFactor;
 	if (suitIcon) {
 		suitIconImage = await loadImage(Buffer.from(suitIcon, 'utf-8'));
 		// Suit may be a different size. Make sure it is still centered beneath rank.
-		const rankToSuitOffset = (rankWidth - suitWidth) / 2;
+		const rankToSuitOffset = (scaledRankWidth - scaledSuitWidth) / 2;
 		suitOffsetX = rankOffsetX + rankToSuitOffset;
-		suitOffsetY = rankOffsetY + rankToSuitOffset + rankHeight + suitHeightOffset;
+		suitOffsetY = rankOffsetY + scaledRankHeight + suitHeightOffset;
 	}
 
 	function drawRankAndSuit() {
-		drawImageWithColor(ctx, rankIconImage, suitFillColor, rankOffsetX, rankOffsetY, rankWidth, rankHeight);
+		drawImageWithColor(ctx, rankIconImage, suitFillColor, rankOffsetX, rankOffsetY, scaledRankWidth, scaledRankHeight);
 		if (suitIconImage) {
-			drawImageWithColor(ctx, suitIconImage, suitFillColor, suitOffsetX, suitOffsetY, suitWidth, suitWidth);
+			drawImageWithColor(ctx, suitIconImage, suitFillColor, suitOffsetX, suitOffsetY, scaledSuitWidth, scaledSuitHeight);
 		}
 	}
 
 	// Draw in top-left, then rotate and draw again.
 	ctx.save();
 	drawRankAndSuit();
-	const centerX = fullArea.width / 2;
-	const centerY = fullArea.height / 2;
+	const centerX = scaledFullWidth / 2;
+	const centerY = scaledFullHeight / 2;
 	ctx.translate(centerX, centerY);
 	ctx.rotate(Math.PI);
 	ctx.translate(-centerX, -centerY);
