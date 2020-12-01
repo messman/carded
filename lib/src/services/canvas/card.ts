@@ -47,7 +47,7 @@ export const cardConstants = {
 	},
 	backgroundColor: '#FCFCFA',
 	blackColor: '#111111',
-	redColor: '#9D1919',
+	redColor: '#8E2A2A',
 	lyricFont: 'Barlow Condensed SemiBold',
 	otherFont: 'Barlow Condensed Medium',
 	rankWidth: 90,

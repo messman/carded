@@ -2,6 +2,11 @@ import { Card, Options, process, Rank, SpotifyCardDesign, spotifyCardDesigner, S
 import * as path from 'path';
 import { processDeckOutput } from './log-output';
 
+export enum FontSize {
+	smaller = .9,
+	larger = 1.1
+}
+
 export async function processSpotify(): Promise<void> {
 	const options: Options<SpotifyCardDesign> = {
 		isDevelopment: true,
@@ -31,11 +36,18 @@ export async function processSpotify(): Promise<void> {
 						{
 							song: 'Listen To The Music',
 							lyrics: [
-								'What the people',
-								'need,',
-								'is a way to',
-								'make them smile',
+								`And if I'm feeling`,
+								`good to you,`,
+								`And you're feeling`,
+								`good to me,`,
+								`There ain't nothing`,
+								`we can't do or say`,
+								// `Feeling good,`,
+								// `Feeling fine,`,
+								// `Oh, baby, let the`,
+								// `music play`
 							],
+							//lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:7Ar4G7Ci11gpt6sfH9Cgz5',
 							geniusLink: 'https://genius.com/The-doobie-brothers-listen-to-the-music-lyrics',
 							year: 1972,
@@ -44,10 +56,14 @@ export async function processSpotify(): Promise<void> {
 						{
 							song: `Long Train Runnin'`,
 							lyrics: [
-								'Without love,',
-								'Where would you be',
-								'right now?',
-								'Without love'
+								`Well pistons`,
+								`keep on churnin',`,
+								`And the wheels go`,
+								`'round and 'round,`,
+								`And the steel rails`,
+								`lie cold and hard,`,
+								`On the mountains`,
+								`they go down`
 							],
 							spotifyUri: 'spotify:track:4nXkbcTj3nyww1cHkw5RAP',
 							geniusLink: 'https://genius.com/The-doobie-brothers-long-train-runnin-lyrics',
@@ -58,10 +74,12 @@ export async function processSpotify(): Promise<void> {
 							song: 'Black Water',
 							lyrics: [
 								`And I ain't`,
-								'got no worries',
-								`'Cause I ain't in`,
-								'no hurry at all'
+								`got no worries,`,
+								`'Cause I ain't`,
+								`in no hurry`,
+								`at all`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:4p8QcNkaq2FQj8uGJ7HEDK',
 							geniusLink: 'https://genius.com/The-doobie-brothers-black-water-lyrics',
 							year: 1974,
@@ -70,12 +88,14 @@ export async function processSpotify(): Promise<void> {
 						{
 							song: 'China Grove',
 							lyrics: [
-								'When the sun comes',
-								'up on a sleepy',
-								'little town',
-								'Down around',
-								'San Antone'
+								`When the sun`,
+								`comes up`,
+								`On a sleepy`,
+								`little town,`,
+								`Down around`,
+								`San Antone`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:7cy1bEJV6FCtDaYpsk8aG6',
 							geniusLink: 'https://genius.com/The-doobie-brothers-china-grove-lyrics',
 							year: 1973,
@@ -86,9 +106,9 @@ export async function processSpotify(): Promise<void> {
 						{
 							song: 'Born To Run',
 							lyrics: [
-								'Oh baby, this town',
-								'rips the bones from',
-								'your back',
+								`Oh baby, this town`,
+								`rips the bones from`,
+								`your back,`,
 								`It's a death trap,`,
 								`It's a suicide rap`,
 							],
@@ -100,9 +120,9 @@ export async function processSpotify(): Promise<void> {
 						{
 							song: 'Born in the U.S.A.',
 							lyrics: [
-								'You end up like',
+								`You end up like`,
 								`a dog that's been`,
-								'beat too much',
+								`beat too much`,
 								`'Til you spend half`,
 								`your life just`,
 								`coverin' up`
@@ -115,204 +135,321 @@ export async function processSpotify(): Promise<void> {
 						{
 							song: 'Glory Days',
 							lyrics: [
-								''
+								`And I hope`,
+								`When I get old`,
+								`I don't sit around`,
+								`thinking about it -`,
+								`But I probably will`
 							],
 							spotifyUri: 'spotify:track:2Y90nL1ohB4sgYELDs7uNx',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Bruce-springsteen-glory-days-lyrics',
+							year: 1985,
+							skip: false
 						},
 						{
 							song: 'Hungry Heart',
 							lyrics: [
-								''
+								`Everybody needs`,
+								`a place to rest,`,
+								`Everybody wants`,
+								`to have a home,`,
+								`Don't make no`,
+								`difference what`,
+								`nobody says,`,
+								`Ain't nobody like`,
+								`to be alone`
 							],
 							spotifyUri: 'spotify:track:1KsI8NEeAna8ZIdojI3FiT',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Bruce-springsteen-hungry-heart-lyrics',
+							year: 1980,
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.three, ['Fleetwood Mac'], true, [
 						{
 							song: 'Go Your Own Way',
 							lyrics: [
-								''
+								`If I could,`,
+								`Baby I'd give`,
+								`you my world,`,
+								`Open up -`,
+								`everything's`,
+								`waiting for you`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:4xh7W7tlNMIczFhupCPniY',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Fleetwood-mac-go-your-own-way-lyrics',
+							year: 1977,
+							skip: false
 						},
 						{
 							song: 'Dreams',
 							lyrics: [
-								''
+								`Thunder only`,
+								`happens when`,
+								`it's raining,`,
+								`Players only`,
+								`love you when`,
+								`they're playing`,
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:0ofHAoxe9vBkTCp2UQIavz',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Fleetwood-mac-dreams-lyrics',
+							year: 1977,
+							skip: false
 						},
 						{
 							song: 'The Chain',
 							lyrics: [
-								''
+								`Listen to the`,
+								`wind blow,`,
+								`Down comes`,
+								`the night,`,
+								`Run in the`,
+								`shadows,`,
+								`Damn your love,`,
+								`Damn your lies`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:5e9TFTbltYBg2xThimr0rU',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Fleetwood-mac-the-chain-lyrics',
+							year: 1977,
+							skip: false
 						},
 						{
-							song: 'Everywhere',
+							song: 'Gypsy',
 							lyrics: [
-								''
+								`And it all comes`,
+								`down to you,`,
+								`Well you know`,
+								`that it does,`,
+								`And lightning`,
+								`strikes,`,
+								`maybe once,`,
+								`maybe twice`
 							],
-							spotifyUri: 'spotify:track:254bXAqt3zP6P50BdQvEsq',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							spotifyUri: 'spotify:track:19Ym5Sg0YyOCa6ao21bdoG',
+							geniusLink: 'https://genius.com/Fleetwood-mac-gypsy-lyrics',
+							year: 1982,
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.four, ['Steve Miller Band'], false, [
 						{
 							song: 'The Joker',
 							lyrics: [
-								''
+								`'Cause`,
+								`I'm a picker,`,
+								`I'm a grinner,`,
+								`I'm a lover,`,
+								`and I'm a sinner,`,
+								`I play my music`,
+								`in the sun`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:1bp2IO61zbQrbWNmKKxg3f',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Steve-miller-band-the-joker-lyrics',
+							year: 1973,
+							skip: false
 						},
 						{
 							song: 'Jet Airliner',
 							lyrics: [
-								''
+								`You know you got`,
+								`to go through hell`,
+								`before you`,
+								`get to heaven`
 							],
 							spotifyUri: 'spotify:track:2zI3bUYn2pcF27of6i2oqK',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Steve-miller-band-jet-airliner-lyrics',
+							year: 1977,
+							skip: false
 						},
 						{
 							song: 'Take The Money And Run',
 							lyrics: [
-								''
+								`Billy Joe`,
+								`shot a man while`,
+								`robbing his castle,`,
+								`Bobbie Sue`,
+								`took the money`,
+								`and run`
 							],
 							spotifyUri: 'spotify:track:1ZhrREyOOeFV6TxDOyiPwu',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Steve-miller-band-take-the-money-and-run-lyrics',
+							year: 1976,
+							skip: false
 						},
 						{
 							song: 'Fly Like An Eagle',
 							lyrics: [
-								''
+								`Time keeps on`,
+								`slippin', slippin',`,
+								`slippin',`,
+								`Into the future`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:3e0FzZjTXOUtiJGSClOBrI',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Steve-miller-band-fly-like-an-eagle-lyrics',
+							year: 1976,
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.five, ['Eagles'], true, [
 						{
 							song: 'Hotel California',
 							lyrics: [
-								''
+								`And still those`,
+								`voices are calling`,
+								`from far away,`,
+								`Wake you up`,
+								`in the middle`,
+								`of the night`,
+								`Just to hear`,
+								`them say`
 							],
 							spotifyUri: 'spotify:track:40riOy7x9W7GXjyGp4pjAv',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Eagles-hotel-california-lyrics',
+							year: 1976,
+							skip: false
 						},
 						{
 							song: 'Life In The Fast Lane',
 							lyrics: [
-								''
+								`They knew all`,
+								`the right people,`,
+								`They took all`,
+								`the right pills,`,
+								`They threw`,
+								`outrageous parties,`,
+								`They paid`,
+								`heavenly bills`
 							],
 							spotifyUri: 'spotify:track:6gXrEUzibufX9xYPk3HD5p',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Eagles-life-in-the-fast-lane-lyrics',
+							year: 1976,
+							skip: false
 						},
 						{
 							song: 'Take It Easy',
 							lyrics: [
-								''
+								`Come on, baby,`,
+								`Don't say maybe,`,
+								`I gotta know if`,
+								`your sweet love`,
+								`is gonna save me`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:4yugZvBYaoREkJKtbG08Qr',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Eagles-take-it-easy-lyrics',
+							year: 1972,
+							skip: false
 						},
 						{
 							song: 'Desperado',
 							lyrics: [
-								''
+								`Now it seems to me`,
+								`some fine things`,
+								`Have been laid`,
+								`upon your table,`,
+								`But you only`,
+								`want the ones`,
+								`that you can't get`
 							],
+							lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:2TjnCxxQRYn56Ye8gkUKiW',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Eagles-desperado-lyrics',
+							year: 1973,
+							skip: false
 						},
 					]),
 					{
 						rank: Rank.six,
 						suit: Suit.spades,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Tom Petty'],
 							includeYearOnNewLine: false,
 							song: `Runnin' Down A Dream`,
-							lyrics: [''],
+							lyrics: [
+								`There's something`,
+								`good waitin'`,
+								`down this road,`,
+								`I'm pickin' up`,
+								`whatever's mine`
+							],
 							spotifyUri: 'spotify:track:5yAu4njFSdM47dfsTkQPZ2',
-							geniusLink: '',
-							year: 9999,
+							geniusLink: 'https://genius.com/Tom-petty-runnin-down-a-dream-lyrics',
+							year: 1989,
 						}
 					},
 					{
 						rank: Rank.six,
 						suit: Suit.clubs,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Tom Petty'],
 							includeYearOnNewLine: false,
 							song: `Free Fallin'`,
-							lyrics: [''],
+							lyrics: [
+								`And I'm a bad boy`,
+								`'Cause I don't`,
+								`even miss her,`,
+								`I'm a bad boy`,
+								`for breakin'`,
+								`her heart`
+							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:5tVA6TkbaAH9QMITTQRrNv',
-							geniusLink: '',
-							year: 9999,
+							geniusLink: 'https://genius.com/Tom-petty-free-fallin-lyrics',
+							year: 1989,
 						}
 					},
 					{
 						rank: Rank.six,
 						suit: Suit.hearts,
-						skip: true,
+						skip: false,
 						design: {
-							artistLines: ['Tom Petty and the Heartbreakers'],
+							artistLines: ['Tom Petty', 'and the Heartbreakers'],
 							includeYearOnNewLine: false,
 							song: `Mary Jane's Last Dance`,
-							lyrics: [''],
+							lyrics: [
+								`Well I don't know`,
+								`but I've been told,`,
+								`You never slow down,`,
+								`you never grow old,`,
+								`I'm tired of screwin' up,`,
+								`tired of going down,`,
+								`tired of myself,`,
+								`tired of this town`,
+							],
+							lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:3dmqIB2Qxe2XZobw9gXxJ6',
-							geniusLink: '',
-							year: 9999
+							geniusLink: 'https://genius.com/Tom-petty-and-the-heartbreakers-mary-janes-last-dance-lyrics',
+							year: 1993
 						}
 					},
 					{
 						rank: Rank.six,
 						suit: Suit.diamonds,
-						skip: true,
+						skip: false,
 						design: {
-							artistLines: ['Tom Petty and the Heartbreakers'],
+							artistLines: ['Tom Petty', 'and the Heartbreakers'],
 							includeYearOnNewLine: false,
 							song: 'American Girl',
-							lyrics: [''],
+							lyrics: [
+								`Yeah and if`,
+								`she had to die`,
+								`tryin' she`,
+								`had one`,
+								`little promise`,
+								`she was`,
+								`gonna keep`
+							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:7MRyJPksH3G2cXHN8UKYzP',
-							geniusLink: '',
-							year: 9999,
+							geniusLink: 'https://genius.com/Tom-petty-and-the-heartbreakers-american-girl-lyrics',
+							year: 1976,
 						}
 					},
 					...createForArtist(Rank.seven, ['Boston'], false, [

@@ -10,6 +10,7 @@ const frameTopHeight = 175;
 
 export interface SpotifyCardDesign extends CardDesign {
 	lyrics: string[];
+	lyricsSizeFactor?: number;
 	artistLines: string[];
 	includeYearOnNewLine: boolean;
 	year: number;
@@ -65,17 +66,18 @@ export const spotifyCardDesigner: SpotifyCardDesigner = {
 			drawImageWithColor(ctx, frameImage, color, areaX, areaY - scaledFrameOffsetY, scaledArtWidth, scaledArtHeight + scaledFrameOffsetY);
 		}
 
-		const { lyrics, year, artistLines } = design;
+		const { lyrics, lyricsSizeFactor, year, artistLines } = design;
 
 		drawYearAndArtist(ctx, color, year, artistLines, areaX, areaY, scaledArtWidth, scaledArtHeight);
 
 		ctx.save();
 		ctx.fillStyle = getSuitFillColor(suit);
-		setFont(ctx, lyricFontHeight * scaleFactor, lyricFont);
+		const scaledLyricFontSize = scaleFactor * lyricFontHeight * (lyricsSizeFactor || 1);
+		setFont(ctx, scaledLyricFontSize, lyricFont);
 		ctx.textAlign = 'center';
 		ctx.textBaseline = 'top';
 
-		const scaledTextOffsetY = scaleFactor * (lyricFontHeight + textOffsetY);
+		const scaledTextOffsetY = scaledLyricFontSize + (scaleFactor * textOffsetY);
 
 		const codeHeight = scaledArtWidth / 4;
 		const scaledFrameTopHeight = frameTopHeight * scaleFactor;

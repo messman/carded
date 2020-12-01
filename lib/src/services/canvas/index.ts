@@ -14,7 +14,6 @@ registerFont('/Users/agm/Library/Fonts/BarlowCondensed-SemiBold.ttf', { family: 
 export function setFont(context: CanvasRenderingContext2D, size: number, font: string, style?: string | number): void {
 	const styleText = style ? `${style} ` : '';
 	context.font = `${styleText} ${size}px "${font}"`;
-	console.log(context.font);
 }
 
 export function drawImageWithColor(ctx: CanvasRenderingContext2D, image: Image, color: string, x: number, y: number, w: number, h: number): void {
