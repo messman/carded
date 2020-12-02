@@ -22,7 +22,7 @@ export interface SpotifyCardDesign extends CardDesign {
 
 export type SpotifyCardDesigner = CardDesigner<SpotifyCardDesign>;
 
-const lyricFontHeight = 50;
+const lyricFontHeight = 52;
 const lineWidth = 4;
 const decorativeLineOffset = 25;
 
@@ -31,7 +31,7 @@ const artHeight = 850;
 const textOffsetY = 5;
 const textAreaPercentOffset = .45;
 
-const yearAndArtistFontHeight = 40;
+const yearAndArtistFontHeight = 44;
 const yearAndArtistMargin = 8;
 
 export const spotifyCardDesigner: SpotifyCardDesigner = {

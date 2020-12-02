@@ -105,8 +105,8 @@ export async function processSpotify(): Promise<void> {
 							song: 'Born To Run',
 							lyrics: [
 								`Oh baby, this town`,
-								`rips the bones from`,
-								`your back,`,
+								`rips the bones`,
+								`from your back,`,
 								`It's a death trap,`,
 								`It's a suicide rap,`,
 								`We gotta get out`,
@@ -115,7 +115,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6hTcuIQa0sxrrByu9wTD7s',
 							geniusLink: 'https://genius.com/Bruce-springsteen-born-to-run-lyrics',
 							year: 1975,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Born in the U.S.A.',
@@ -175,7 +175,7 @@ export async function processSpotify(): Promise<void> {
 								`If I could,`,
 								`Baby I'd give`,
 								`you my world,`,
-								`Open up -`,
+								`Open up,`,
 								`everything's`,
 								`waiting for you`
 							],
@@ -183,7 +183,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:4xh7W7tlNMIczFhupCPniY',
 							geniusLink: 'https://genius.com/Fleetwood-mac-go-your-own-way-lyrics',
 							year: 1977,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Dreams',
@@ -221,19 +221,19 @@ export async function processSpotify(): Promise<void> {
 						{
 							song: 'Gypsy',
 							lyrics: [
-								`And it all comes`,
-								`down to you,`,
-								`Well you know`,
-								`that it does,`,
-								`And lightning`,
-								`strikes,`,
-								`maybe once,`,
-								`maybe twice`
+								`I have no fear,`,
+								`I have only love,`,
+								`And if I was a child,`,
+								`and the child`,
+								`was enough,`,
+								`enough for me`,
+								`to love,`,
+								`enough to love`
 							],
-							spotifyUri: 'spotify:track:19Ym5Sg0YyOCa6ao21bdoG',
+							spotifyUri: 'spotify:track:5J0aNEUTxJWKXnQmyY3vUp',
 							geniusLink: 'https://genius.com/Fleetwood-mac-gypsy-lyrics',
 							year: 1982,
-							skip: true
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.four, ['The Doobie Brothers'], [
@@ -416,7 +416,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.six,
 						suit: Suit.hearts,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Tom Petty', 'and the Heartbreakers'],
 							song: `Mary Jane's Last Dance`,
@@ -425,7 +425,8 @@ export async function processSpotify(): Promise<void> {
 								`but I've been told,`,
 								`You never slow down,`,
 								`you never grow old,`,
-								`I'm tired of screwin' up,`,
+								`I'm tired of`,
+								`screwin' up,`,
 								`tired of going down,`,
 								`tired of myself,`,
 								`tired of this town`,
@@ -881,7 +882,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6L5BZEcZmD6RBJnimzlyKr',
 							geniusLink: 'https://genius.com/The-moody-blues-nights-in-white-satin-lyrics',
 							year: 1967,
-							skip: false
+							skip: true
 						},
 						{
 							song: `I'm Just A Singer (In A Rock And Roll Band)`,
@@ -898,7 +899,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:7sXbG2xdtX18rHoXcGosFI',
 							geniusLink: 'https://genius.com/The-moody-blues-im-just-a-singer-in-a-rocknroll-band-lyrics',
 							year: 1972,
-							skip: false
+							skip: true
 						},
 						{
 							song: 'Your Wildest Dreams',
@@ -913,7 +914,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:1T4iwEA2ySieXjWxjiMVWs',
 							geniusLink: 'https://genius.com/The-moody-blues-your-wildest-dreams-lyrics',
 							year: 1986,
-							skip: false
+							skip: true
 						},
 						{
 							song: 'Melancholy Man',
@@ -929,7 +930,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:1NeQzAqahRYI09bgLbhVFN',
 							geniusLink: 'https://genius.com/The-moody-blues-melancholy-man-lyrics',
 							year: 1970,
-							skip: false
+							skip: true
 						}
 					]),
 					{
@@ -944,12 +945,11 @@ export async function processSpotify(): Promise<void> {
 								`in Rhode Island,`,
 								`A man came to the`,
 								`stage one night,`,
-								`He smoked a big`,
-								`cigar and drove`,
-								`a cadillac car,`,
-								`He said "Boys, I`,
-								`think this band's`,
-								`outta sight"`
+								`He smoked a big cigar`,
+								`and drove a`,
+								`cadillac car, He said`,
+								`"Boys, I think this`,
+								`band's outta sight"`
 							],
 							lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:5E89Izp4YhPyNShoxiOJ1u',
@@ -960,7 +960,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.joker2,
 						suit: Suit.none,
-						skip: false,
+						skip: true,
 						design: {
 							artistLines: ['Boston'],
 							song: 'Foreplay / Long Time',
