@@ -32,7 +32,7 @@ export async function processSpotify(): Promise<void> {
 				outputAbsoluteDirectory: path.join(__dirname, '../out'),
 				outputDeckPrefix: 'spotify_',
 				cards: [
-					...createForArtist(Rank.ace, ['The Doobie Brothers'], true, [
+					...createForArtist(Rank.ace, ['The Doobie Brothers'], [
 						{
 							song: 'Listen To The Music',
 							lyrics: [
@@ -102,7 +102,7 @@ export async function processSpotify(): Promise<void> {
 							skip: false
 						},
 					]),
-					...createForArtist(Rank.two, ['Bruce Springsteen'], false, [
+					...createForArtist(Rank.two, ['Bruce Springsteen'], [
 						{
 							song: 'Born To Run',
 							lyrics: [
@@ -165,7 +165,7 @@ export async function processSpotify(): Promise<void> {
 							skip: false
 						},
 					]),
-					...createForArtist(Rank.three, ['Fleetwood Mac'], true, [
+					...createForArtist(Rank.three, ['Fleetwood Mac'], [
 						{
 							song: 'Go Your Own Way',
 							lyrics: [
@@ -234,7 +234,7 @@ export async function processSpotify(): Promise<void> {
 							skip: false
 						},
 					]),
-					...createForArtist(Rank.four, ['Steve Miller Band'], false, [
+					...createForArtist(Rank.four, ['Steve Miller Band'], [
 						{
 							song: 'The Joker',
 							lyrics: [
@@ -295,7 +295,7 @@ export async function processSpotify(): Promise<void> {
 							skip: false
 						},
 					]),
-					...createForArtist(Rank.five, ['Eagles'], true, [
+					...createForArtist(Rank.five, ['Eagles'], [
 						{
 							song: 'Hotel California',
 							lyrics: [
@@ -369,7 +369,6 @@ export async function processSpotify(): Promise<void> {
 						skip: false,
 						design: {
 							artistLines: ['Tom Petty'],
-							includeYearOnNewLine: false,
 							song: `Runnin' Down A Dream`,
 							lyrics: [
 								`There's something`,
@@ -389,7 +388,6 @@ export async function processSpotify(): Promise<void> {
 						skip: false,
 						design: {
 							artistLines: ['Tom Petty'],
-							includeYearOnNewLine: false,
 							song: `Free Fallin'`,
 							lyrics: [
 								`And I'm a bad boy`,
@@ -411,7 +409,6 @@ export async function processSpotify(): Promise<void> {
 						skip: false,
 						design: {
 							artistLines: ['Tom Petty', 'and the Heartbreakers'],
-							includeYearOnNewLine: false,
 							song: `Mary Jane's Last Dance`,
 							lyrics: [
 								`Well I don't know`,
@@ -435,7 +432,6 @@ export async function processSpotify(): Promise<void> {
 						skip: false,
 						design: {
 							artistLines: ['Tom Petty', 'and the Heartbreakers'],
-							includeYearOnNewLine: false,
 							song: 'American Girl',
 							lyrics: [
 								`Yeah and if`,
@@ -452,326 +448,512 @@ export async function processSpotify(): Promise<void> {
 							year: 1976,
 						}
 					},
-					...createForArtist(Rank.seven, ['Boston'], false, [
+					...createForArtist(Rank.seven, ['Boston'], [
 						{
 							song: `Rock n' Roll Band`,
 							lyrics: [
-								''
+								`Well, we were`,
+								`just another band`,
+								`out of Boston,`,
+								`On the road`,
+								`to try to make`,
+								`ends meet`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:5E89Izp4YhPyNShoxiOJ1u',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Boston-rock-and-roll-band-lyrics',
+							year: 1976,
+							skip: false
 						},
 						{
-							song: 'Peace Of Mind',
+							song: `Don't Look Back`,
 							lyrics: [
-								''
+								`I can see,`,
+								`it took so long`,
+								`just to realize,`,
+								`I'm much too strong`,
+								`not to compromise`
 							],
-							spotifyUri: 'spotify:track:1GqlvSEtMx5xbGptxOTTyk',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							spotifyUri: 'spotify:track:4QySZtWymRGNgrwxZOODKF',
+							geniusLink: 'https://genius.com/Boston-dont-look-back-lyrics',
+							year: 1978,
+							skip: false
 						},
 						{
 							song: 'Foreplay / Long Time',
 							lyrics: [
-								''
+								`Well I'm takin'`,
+								`my time,`,
+								`I'm just movin'`,
+								`along,`,
+								`You'll forget about`,
+								`me after I've`,
+								`been gone`
 							],
 							spotifyUri: 'spotify:track:39C5FuZ8C8M0QI8CrMsPkR',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Boston-foreplay-long-time-lyrics',
+							year: 1976,
+							skip: false
 						},
 						{
-							song: `Smokin'`,
+							song: `Feelin' Satisfied`,
 							lyrics: [
-								''
+								`So come on,`,
+								`Put your hands`,
+								`together,`,
+								`You know it's now`,
+								`or never,`,
+								`Take a chance on`,
+								`Rock 'n Roll`
 							],
-							spotifyUri: 'spotify:track:5u5qlnyVaewWugJIjzilIc',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							lyricsSizeFactor: FontSize.larger,
+							spotifyUri: 'spotify:track:0yqIpi7zj74a0CRCedacOW',
+							geniusLink: 'https://genius.com/Boston-feelin-satisfied-lyrics',
+							year: 1978,
+							skip: false
 						},
 					]),
-					...createForArtist(Rank.eight, ['The Rolling Stones'], false, [
+					...createForArtist(Rank.eight, ['The Rolling Stones'], [
 						{
 							song: 'Gimme Shelter',
 							lyrics: [
-								''
+								`Oh, a storm is`,
+								`threatening,`,
+								`My very life today,`,
+								`If I don't get`,
+								`some shelter,`,
+								`Oh yeah, I'm gonna`,
+								`fade away`
 							],
 							spotifyUri: 'spotify:track:6H3kDe7CGoWYBabAeVWGiD',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-rolling-stones-gimme-shelter-lyrics',
+							year: 1969,
+							skip: false
 						},
 						{
 							song: `(I Can't Get No) Satisfaction`,
 							lyrics: [
-								''
+								`'Cause I try,`,
+								`and I try,`,
+								`and I try,`,
+								`and I try`,
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:2PzU4IB8Dr6mxV3lHuaG34',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-rolling-stones-i-cant-get-no-satisfaction-lyrics',
+							year: 1965,
+							skip: false
 						},
 						{
 							song: 'Miss You',
 							lyrics: [
-								''
+								`"Hey, what's the`,
+								`matter, man?`,
+								`We're gon' come`,
+								`around at twelve`,
+								`with some`,
+								`Puerto Rican girls`,
+								`that's just dyin'`,
+								`to meet you!"`
 							],
 							spotifyUri: 'spotify:track:3hJLKtTpgct9Y9wKww0BiR',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-rolling-stones-miss-you-lyrics',
+							year: 1978,
+							skip: false
 						},
 						{
 							song: 'Paint It, Black',
 							lyrics: [
-								''
+								`If I look hard`,
+								`enough into the`,
+								`setting sun,`,
+								`My love will`,
+								`laugh with me`,
+								`before the morning`,
+								`comes`
 							],
 							spotifyUri: 'spotify:track:63T7DJ1AFDD6Bn8VzG6JE8',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-rolling-stones-paint-it-black-lyrics',
+							year: 1966,
+							skip: false
 						},
 					]),
-					...createForArtist(Rank.nine, ['Billy Joel'], false, [
+					...createForArtist(Rank.nine, ['Billy Joel'], [
 						{
 							song: `Movin' Out (Anthony's Song)`,
 							lyrics: [
-								''
+								`Who needs a house`,
+								`out in Hackensack,`,
+								`Is that all you get`,
+								`for your money?`
 							],
 							spotifyUri: 'spotify:track:0J0eyUFhkW1bIu0TWPcJhV',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Billy-joel-movin-out-anthonys-song-lyrics',
+							year: 1977,
+							skip: false
 						},
 						{
 							song: `The Downeaster 'Alexa'`,
 							lyrics: [
-								''
+								`They say`,
+								`these waters`,
+								`aren't what they`,
+								`used to be,`,
+								`But I got people`,
+								`back on land`,
+								`who count on me`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:39cFQHfY6tsdMRmSbFse3X',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Billy-joel-the-downeaster-alexa-lyrics',
+							year: 1989,
+							skip: false
 						},
 						{
 							song: 'You May Be Right',
 							lyrics: [
-								''
+								`If I'm crazy then`,
+								`it's true,`,
+								`That it's all`,
+								`because of you,`,
+								`And you wouldn't`,
+								`want me any`,
+								`other way`
 							],
 							spotifyUri: 'spotify:track:7gMOe0gXYcELUoVugfMmHP',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Billy-joel-you-may-be-right-lyrics',
+							year: 1980,
+							skip: false
 						},
 						{
 							song: 'The Ballad Of Billy The Kid',
 							lyrics: [
-								''
+								`Well he never`,
+								`traveled heavy,`,
+								`Yes, he always`,
+								`rode alone,`,
+								`And he soon put`,
+								`many older guns`,
+								`to shame`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:31RKj9kULWI2lM4tYSvAmb',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Billy-joel-the-ballad-of-billy-the-kid-lyrics',
+							year: 1973,
+							skip: false
 						},
 					]),
-					...createForArtist(Rank.ten, ['The Who'], false, [
+					...createForArtist(Rank.ten, ['The Who'], [
 						{
 							song: 'Pinball Wizard',
 							lyrics: [
-								''
+								`Ever since I was`,
+								`a young boy`,
+								`I've played the`,
+								`silver ball,`,
+								`From Soho down`,
+								`to Brighton`,
+								`I must've played`,
+								`'em all`
 							],
 							spotifyUri: 'spotify:track:6LbbHFEajG9e4m0G3L47c4',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-who-pinball-wizard-lyrics',
+							year: 1969,
+							skip: false
 						},
 						{
 							song: `Baba O'Riley`,
 							lyrics: [
-								''
+								`I don't need`,
+								`to fight`,
+								`To prove I'm`,
+								`right,`,
+								`I don't need`,
+								`to be forgiven`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:3qiyyUfYe7CRYLucrPmulD',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-who-baba-oriley-lyrics',
+							year: 1971,
+							skip: false
 						},
 						{
 							song: 'Behind Blue Eyes',
 							lyrics: [
-								''
+								`But my dreams`,
+								`they aren't`,
+								`as empty`,
+								`as my conscience`,
+								`seems to be`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:0cKk8BKEi7zXbdrYdyqBP5',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-who-behind-blue-eyes-lyrics',
+							year: 1971,
+							skip: false
 						},
 						{
 							song: 'Who Are You',
 							lyrics: [
-								''
+								`I stretched back`,
+								`and I hiccupped`,
+								`And looked back on`,
+								`my busy day,`,
+								`Eleven hours in`,
+								`The Tin Pan`,
+								`God, there's got to`,
+								`be another way`
 							],
 							spotifyUri: 'spotify:track:23IJ5wLRhEZ9DOuia5mPiZ',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-who-who-are-you-lyrics',
+							year: 1978,
+							skip: false
 						}
 					]),
-					...createForArtist(Rank.jack, ['Led Zeppelin'], false, [
+					...createForArtist(Rank.jack, ['Led Zeppelin'], [
 						{
 							song: 'Immigrant Song',
 							lyrics: [
-								''
+								`We come from`,
+								`the land of the`,
+								`ice and snow,`,
+								`From the`,
+								`midnight sun`,
+								`where the`,
+								`hot springs flow`
 							],
 							spotifyUri: 'spotify:track:78lgmZwycJ3nzsdgmPPGNx',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Led-zeppelin-immigrant-song-lyrics',
+							year: 1970,
+							skip: false
 						},
 						{
 							song: 'Dazed and Confused',
 							lyrics: [
-								''
+								`Sweet little baby`,
+								`I don't know where`,
+								`you've been,`,
+								`Gonna love you baby`,
+								`here I come again`
 							],
 							spotifyUri: 'spotify:track:1RIsAtnYOlo8zGMycNFioq',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Led-zeppelin-dazed-and-confused-lyrics',
+							year: 1969,
+							skip: false
 						},
 						{
 							song: 'Over the Hills and Far Away',
 							lyrics: [
-								''
+								`Many times I've lied`,
+								`and many times`,
+								`I've listened,`,
+								`Many times`,
+								`I've wondered`,
+								`How much there is`,
+								`to know`
 							],
 							spotifyUri: 'spotify:track:35XlkvHy9WHPI4Tf9eax4t',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Led-zeppelin-over-the-hills-and-far-away-lyrics',
+							year: 1973,
+							skip: false
 						},
 						{
-							song: 'Rock and Roll',
+							song: 'Kashmir',
 							lyrics: [
-								''
+								`Oh let the sun beat`,
+								`down upon my face`,
+								`With stars to fill`,
+								`my dreams,`,
+								`I am a traveler of`,
+								`both time and space`,
+								`to be where I have been`
 							],
-							spotifyUri: 'spotify:track:7HQrFPtLEpgTJaEVujH8OO',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							lyricsSizeFactor: FontSize.smaller,
+							spotifyUri: 'spotify:track:2nVHqZbOGkKWzlcy1aMbE7',
+							geniusLink: 'https://genius.com/Led-zeppelin-kashmir-lyrics',
+							year: 1975,
+							skip: false
 						}
 					]),
-					...createForArtist(Rank.queen, ['Queen'], false, [
+					...createForArtist(Rank.queen, ['Queen'], [
 						{
 							song: 'Somebody To Love',
 							lyrics: [
-								''
+								`I just gotta`,
+								`get out of`,
+								`this prison cell,`,
+								`Someday I'm gonna`,
+								`be free, lord`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:6cFZ4PLC19taNlpl9pbGMf',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Queen-somebody-to-love-lyrics',
+							year: 1976,
+							skip: false
 						},
 						{
 							song: 'Bohemian Rhapsody',
 							lyrics: [
-								''
+								`I see a little`,
+								`silhouetto`,
+								`of a man,`,
+								`Scaramouche,`,
+								`Scaramouche,`,
+								`will you do`,
+								`the Fandango?`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:7tFiyTwD0nx5a1eklYtX2J',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Queen-bohemian-rhapsody-lyrics',
+							year: 1975,
+							skip: false
 						},
 						{
 							song: 'Another One Bites The Dust',
 							lyrics: [
-								''
+								`How do you think`,
+								`I'm gonna get along`,
+								`Without you`,
+								`When you're gone?`,
+								`You took me for`,
+								`everything that I had`,
+								`and kicked me`,
+								`out on my own`
 							],
+							lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:57JVGBtBLCfHw2muk5416J',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Queen-another-one-bites-the-dust-lyrics',
+							year: 1980,
+							skip: false
 						},
 						{
 							song: 'We Are The Champions',
 							lyrics: [
-								''
+								`I've taken my bows`,
+								`And my curtain calls,`,
+								`You brought me`,
+								`fame and fortune`,
+								`and everything that`,
+								`goes with it,`,
+								`I thank you all`
 							],
+							lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:7ccI9cStQbQdystvc6TvxD',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/Queen-we-are-the-champions-lyrics',
+							year: 1977,
+							skip: false
 						}
 					]),
-					...createForArtist(Rank.king, ['The Moody Blues'], false, [
+					...createForArtist(Rank.king, ['The Moody Blues'], [
 						{
 							song: 'Nights In White Satin',
 							lyrics: [
-								''
+								`Some try`,
+								`to tell me`,
+								`Thoughts they`,
+								`cannot defend,`,
+								`Just what you`,
+								`want to be`,
+								`you will be`,
+								`in the end`
 							],
+							lyricsSizeFactor: FontSize.larger,
 							spotifyUri: 'spotify:track:6L5BZEcZmD6RBJnimzlyKr',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-moody-blues-nights-in-white-satin-lyrics',
+							year: 1967,
+							skip: false
 						},
 						{
 							song: `I'm Just A Singer (In A Rock And Roll Band)`,
 							lyrics: [
-								''
+								`A thousand miles can`,
+								`lead so many ways`,
+								`Just to know who`,
+								`is driving`,
+								`What a help`,
+								`it would be`
 							],
 							spotifyUri: 'spotify:track:7sXbG2xdtX18rHoXcGosFI',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-moody-blues-im-just-a-singer-in-a-rocknroll-band-lyrics',
+							year: 1972,
+							skip: false
 						},
 						{
 							song: 'Your Wildest Dreams',
 							lyrics: [
-								''
+								`Once upon a time`,
+								`Once when you`,
+								`were mine`,
+								`I remember skies`,
+								`reflected in`,
+								`your eyes`
+
 							],
 							spotifyUri: 'spotify:track:1T4iwEA2ySieXjWxjiMVWs',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-moody-blues-your-wildest-dreams-lyrics',
+							year: 1986,
+							skip: false
 						},
 						{
 							song: 'Melancholy Man',
 							lyrics: [
-								''
+								`His life caught up`,
+								`in misery`,
+								`He doesn't think`,
+								`like you and me`,
+								`'Cause he can't see`,
+								`what you and I`,
+								`can see`
 							],
 							spotifyUri: 'spotify:track:1NeQzAqahRYI09bgLbhVFN',
-							geniusLink: '',
-							year: 9999,
-							skip: true
+							geniusLink: 'https://genius.com/The-moody-blues-melancholy-man-lyrics',
+							year: 1970,
+							skip: false
 						}
 					]),
 					{
-						rank: Rank.joker,
+						rank: Rank.joker1,
 						suit: Suit.none,
-						skip: true,
+						skip: false,
 						design: {
-							artistLines: ['George Thorogood & The Destroyers'],
-							includeYearOnNewLine: false,
+							artistLines: ['George Thorogood', 'and the Destroyers'],
 							song: 'Bad To The Bone',
-							lyrics: [''],
+							lyrics: [
+								`I broke a`,
+								`thousand hearts`,
+								`before I met you,`,
+								`I'll break a`,
+								`thousand more, baby,`,
+								`before I am through`
+							],
 							spotifyUri: 'spotify:track:6s0NHplywwr1IjnQpUpWJk',
-							geniusLink: '',
-							year: 9999,
+							geniusLink: 'https://genius.com/George-thorogood-and-the-destroyers-bad-to-the-bone-lyrics',
+							year: 1982,
 						}
 					},
 					{
-						rank: Rank.joker,
+						rank: Rank.joker2,
 						suit: Suit.none,
-						skip: true,
+						skip: false,
 						design: {
-							artistLines: ['George Thorogood & The Destroyers'],
-							includeYearOnNewLine: false,
+							artistLines: ['George Thorogood', 'and the Destroyers'],
 							song: 'One Bourbon, One Scotch, One Beer',
-							lyrics: [''],
+							lyrics: [
+								`So I stop`,
+								`in the local bar,`,
+								`you know, people,`,
+								`I go to the bar,`,
+								`I ring my coat,`,
+								`I call the bartender,`,
+								`Said, "Look man,`,
+								`come down here,"`,
+								`he got down there,`,
+								`"So what you want?"`
+							],
+							lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:0s995gCthqnYJCWGvfKpNt',
-							geniusLink: '',
-							year: 9999,
+							geniusLink: 'https://genius.com/George-thorogood-and-the-destroyers-one-bourbon-one-scotch-one-beer-lyrics',
+							year: 1972,
 						}
 					}
 				]
@@ -786,11 +968,11 @@ export async function processSpotify(): Promise<void> {
 	});
 }
 
-interface DesignWithoutArtist extends Omit<SpotifyCardDesign, 'artistLines' | 'includeYearOnNewLine'> {
+interface DesignWithoutArtist extends Omit<SpotifyCardDesign, 'artistLines'> {
 	skip?: boolean;
 }
 
-function createForArtist(rank: Rank, artistLines: string[], includeYearOnNewLine: boolean, designs: DesignWithoutArtist[]): Card<SpotifyCardDesign>[] {
+function createForArtist(rank: Rank, artistLines: string[], designs: DesignWithoutArtist[]): Card<SpotifyCardDesign>[] {
 	return designs.map((design, index) => {
 		return {
 			rank: rank,
@@ -798,7 +980,6 @@ function createForArtist(rank: Rank, artistLines: string[], includeYearOnNewLine
 			skip: design.skip,
 			design: {
 				artistLines: artistLines,
-				includeYearOnNewLine: includeYearOnNewLine,
 				...design,
 			}
 		};

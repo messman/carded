@@ -12,7 +12,6 @@ export interface SpotifyCardDesign extends CardDesign {
 	lyrics: string[];
 	lyricsSizeFactor?: number;
 	artistLines: string[];
-	includeYearOnNewLine: boolean;
 	year: number;
 	song: string;
 	spotifyUri: string;

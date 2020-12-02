@@ -16,7 +16,7 @@ export async function processEmpty(): Promise<void> {
 						design: {}
 					},
 					{
-						rank: Rank.joker,
+						rank: Rank.joker1,
 						suit: Suit.none,
 						design: {}
 					},

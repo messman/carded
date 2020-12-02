@@ -13,7 +13,8 @@ export interface Deck<CD extends CardDesign> {
 }
 
 export enum Rank {
-	joker,
+	joker1,
+	joker2,
 	ace,
 	two,
 	three,

@@ -10,8 +10,11 @@ const suitIcons: Record<keyof typeof Suit, string> = {
 	spades: require('@/static/icons/suit-spade.svg').default as string,
 };
 
+const jokerIconString = require('@/static/icons/rank-joker.svg').default as string;
+
 const rankIcons: Record<keyof typeof Rank, string> = {
-	joker: require('@/static/icons/rank-joker.svg').default as string,
+	joker1: jokerIconString,
+	joker2: jokerIconString,
 	ace: require('@/static/icons/rank-ace.svg').default as string,
 	two: require('@/static/icons/rank-two.svg').default as string,
 	three: require('@/static/icons/rank-three.svg').default as string,
@@ -100,7 +103,7 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 	const rankOffsetX = designOffsetX;
 	const rankOffsetY = designOffsetY + (rankHeightOffset * scaleFactor);
 	const scaledRankWidth = rankWidth * scaleFactor;
-	const scaledRankHeight = (rank === Rank.joker ? jokerRankHeight : rankHeight) * scaleFactor;
+	const scaledRankHeight = ((rank === Rank.joker1 || rank === Rank.joker2) ? jokerRankHeight : rankHeight) * scaleFactor;
 
 	// Compute all the suit positioning and size.
 	const suitIcon = suitIcons[Suit[suit] as keyof typeof Suit];
