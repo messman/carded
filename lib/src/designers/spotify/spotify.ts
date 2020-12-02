@@ -7,6 +7,7 @@ import { CardDesign, CardDesigner, CardOutputStatus } from '../../options/models
 const frame = require('@/static/icons/frame.svg').default as string;
 const frameOffsetY = 15;
 const frameTopHeight = 175;
+const frameBottomHeight = 70;
 
 export interface SpotifyCardDesign extends CardDesign {
 	lyrics: string[];
@@ -28,7 +29,7 @@ const decorativeLineOffset = 25;
 const artWidth = 450;
 const artHeight = 850;
 const textOffsetY = 5;
-const textAreaPercentOffset = .3;
+const textAreaPercentOffset = .45;
 
 const yearAndArtistFontHeight = 40;
 const yearAndArtistMargin = 8;
@@ -80,13 +81,15 @@ export const spotifyCardDesigner: SpotifyCardDesigner = {
 
 		const codeHeight = scaledArtWidth / 4;
 		const scaledFrameTopHeight = frameTopHeight * scaleFactor;
-		const openTextSpace = scaledArtHeight - scaledFrameTopHeight - codeHeight;
+		const scaledFrameBottomHeight = frameBottomHeight * scaleFactor;
+		const openTextSpace = scaledArtHeight - scaledFrameTopHeight - scaledFrameBottomHeight - codeHeight;
 
 		const totalLyricHeight = lyrics.length * scaledTextOffsetY;
 		const lyricsStartY = areaY + scaledFrameTopHeight + ((openTextSpace - totalLyricHeight) * textAreaPercentOffset);
 
 		lyrics.forEach((lyric, index) => {
-			ctx.fillText(lyric.toUpperCase(), centerX, lyricsStartY + (index * scaledTextOffsetY));
+			const lyricText = lyric.trim().toUpperCase();
+			ctx.fillText(lyricText, centerX, lyricsStartY + (index * scaledTextOffsetY));
 		});
 		ctx.restore();
 
