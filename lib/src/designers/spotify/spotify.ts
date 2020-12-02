@@ -1,8 +1,8 @@
-import { drawImageWithColor, setFont } from '@/services/canvas';
+import { drawImageWithColor, setFont } from '@/services/canvas/canvas';
 import { cardConstants, getSuitFillColor } from '@/services/canvas/card';
-import { loadSampleSpotifyCode } from '@/services/spotify';
+import { loadSampleSpotifyCode } from '@/services/spotify/spotify';
 import { CanvasRenderingContext2D, Image, loadImage } from 'canvas';
-import { CardDesign, CardDesigner, CardOutputStatus } from '../../options/models';
+import { CardDesign, CardDesigner, CardOutputStatus } from '../../options/models/models';
 
 const frame = require('@/static/icons/frame.svg').default as string;
 const frameOffsetY = 15;

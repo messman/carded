@@ -1,6 +1,6 @@
 import { CanvasRenderingContext2D, Image, loadImage } from 'canvas';
-import { drawImageWithColor } from '.';
-import { Card, Rank, Suit } from '../../options/models';
+import { drawImageWithColor } from './canvas';
+import { Card, Rank, Suit } from '../../options/models/models';
 
 const suitIcons: Record<keyof typeof Suit, string> = {
 	none: '',

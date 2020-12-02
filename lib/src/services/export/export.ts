@@ -1,5 +1,5 @@
 import { Canvas } from 'canvas';
-import { log } from '../log';
+import { log } from '../log/log';
 
 import * as fs from 'fs';
 import * as path from 'path';

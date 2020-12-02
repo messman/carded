@@ -1,9 +1,9 @@
 import { emptyCardDesigner } from './designers/empty';
-import { CardDesign, CardDesigner, ProcessCardOutput, Options, Deck, Card, Rank, Suit, CardOutputStatus } from './options/models';
-import { create } from './services/canvas';
-import { log } from './services/log';
+import { CardDesign, CardDesigner, ProcessCardOutput, Options, Deck, Card, Rank, Suit, CardOutputStatus } from './options/models/models';
+import { create } from './services/canvas/canvas';
+import { log } from './services/log/log';
 import * as path from 'path';
-import { exportCanvasToPNG } from './services/export';
+import { exportCanvasToPNG } from './services/export/export';
 import { drawBasicCard } from './services/canvas/card';
 
 export interface ProcessOutput<CD extends CardDesign = any> {
