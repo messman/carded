@@ -39,7 +39,7 @@ export async function processSpotify(): Promise<void> {
 								`You're calling`,
 								`my name`,
 								`but I gotta`,
-								`make clear,`,
+								`make clear`,
 								`I can't say baby`,
 								`Where I'll be`,
 								`In a year`
@@ -65,7 +65,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:0NJC0FDCODpPUntRTTQq97',
 							geniusLink: 'https://genius.com/Aerosmith-cryin-lyrics',
 							year: 1993,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Dream On',
@@ -80,7 +80,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:5MxNLUsfh7uzROypsoO5qe',
 							geniusLink: 'https://genius.com/Aerosmith-dream-on-lyrics',
 							year: 1973,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Walk This Way',
@@ -97,14 +97,14 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:5SZ6zX4rOrEQferfFC2MfP',
 							geniusLink: 'https://genius.com/Aerosmith-walk-this-way-lyrics',
 							year: 1975,
-							skip: true
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.two, ['Bruce Springsteen'], [
 						{
 							song: 'Born To Run',
 							lyrics: [
-								`Oh baby, this town`,
+								`Oh baby this town`,
 								`rips the bones`,
 								`from your back,`,
 								`It's a death trap,`,
@@ -115,7 +115,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6hTcuIQa0sxrrByu9wTD7s',
 							geniusLink: 'https://genius.com/Bruce-springsteen-born-to-run-lyrics',
 							year: 1975,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Born in the U.S.A.',
@@ -130,7 +130,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:0dOg1ySSI7NkpAe89Zo0b9',
 							geniusLink: 'https://genius.com/Bruce-springsteen-born-in-the-usa-lyrics',
 							year: 1984,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Glory Days',
@@ -146,7 +146,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:2Y90nL1ohB4sgYELDs7uNx',
 							geniusLink: 'https://genius.com/Bruce-springsteen-glory-days-lyrics',
 							year: 1985,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Hungry Heart',
@@ -165,7 +165,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:1KsI8NEeAna8ZIdojI3FiT',
 							geniusLink: 'https://genius.com/Bruce-springsteen-hungry-heart-lyrics',
 							year: 1980,
-							skip: true
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.three, ['Fleetwood Mac'], [
@@ -183,7 +183,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:4xh7W7tlNMIczFhupCPniY',
 							geniusLink: 'https://genius.com/Fleetwood-mac-go-your-own-way-lyrics',
 							year: 1977,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Dreams',
@@ -199,7 +199,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:0ofHAoxe9vBkTCp2UQIavz',
 							geniusLink: 'https://genius.com/Fleetwood-mac-dreams-lyrics',
 							year: 1977,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'The Chain',
@@ -216,14 +216,14 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:5e9TFTbltYBg2xThimr0rU',
 							geniusLink: 'https://genius.com/Fleetwood-mac-the-chain-lyrics',
 							year: 1977,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Gypsy',
 							lyrics: [
 								`I have no fear,`,
 								`I have only love,`,
-								`And if I was a child,`,
+								`And if I was a child`,
 								`and the child`,
 								`was enough,`,
 								`enough for me`,
@@ -233,7 +233,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:5J0aNEUTxJWKXnQmyY3vUp',
 							geniusLink: 'https://genius.com/Fleetwood-mac-gypsy-lyrics',
 							year: 1982,
-							skip: true
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.four, ['The Doobie Brothers'], [
@@ -241,44 +241,39 @@ export async function processSpotify(): Promise<void> {
 							song: 'Listen To The Music',
 							lyrics: [
 								`And if I'm feeling`,
-								`good to you,`,
+								`good to you`,
 								`And you're feeling`,
 								`good to me,`,
 								`There ain't nothing`,
 								`we can't do or say`,
-								// `Feeling good,`,
-								// `Feeling fine,`,
-								// `Oh, baby, let the`,
-								// `music play`
 							],
-							//lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:7Ar4G7Ci11gpt6sfH9Cgz5',
 							geniusLink: 'https://genius.com/The-doobie-brothers-listen-to-the-music-lyrics',
 							year: 1972,
-							skip: true
+							skip: false
 						},
 						{
 							song: `Long Train Runnin'`,
 							lyrics: [
 								`Well pistons`,
-								`keep on churnin',`,
+								`keep on churnin'`,
 								`And the wheels go`,
-								`'round and 'round,`,
+								`'round and 'round`,
 								`And the steel rails`,
-								`lie cold and hard,`,
+								`lie cold and hard`,
 								`On the mountains`,
 								`they go down`
 							],
 							spotifyUri: 'spotify:track:4nXkbcTj3nyww1cHkw5RAP',
 							geniusLink: 'https://genius.com/The-doobie-brothers-long-train-runnin-lyrics',
 							year: 1973,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Black Water',
 							lyrics: [
 								`And I ain't`,
-								`got no worries,`,
+								`got no worries`,
 								`'Cause I ain't`,
 								`in no hurry`,
 								`at all`
@@ -287,7 +282,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:4p8QcNkaq2FQj8uGJ7HEDK',
 							geniusLink: 'https://genius.com/The-doobie-brothers-black-water-lyrics',
 							year: 1974,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'China Grove',
@@ -295,7 +290,7 @@ export async function processSpotify(): Promise<void> {
 								`When the sun`,
 								`comes up`,
 								`On a sleepy`,
-								`little town,`,
+								`little town`,
 								`Down around`,
 								`San Antone`
 							],
@@ -303,7 +298,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:7cy1bEJV6FCtDaYpsk8aG6',
 							geniusLink: 'https://genius.com/The-doobie-brothers-china-grove-lyrics',
 							year: 1973,
-							skip: true
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.five, ['Eagles'], [
@@ -322,7 +317,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:40riOy7x9W7GXjyGp4pjAv',
 							geniusLink: 'https://genius.com/Eagles-hotel-california-lyrics',
 							year: 1976,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Life In The Fast Lane',
@@ -339,12 +334,12 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6gXrEUzibufX9xYPk3HD5p',
 							geniusLink: 'https://genius.com/Eagles-life-in-the-fast-lane-lyrics',
 							year: 1976,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Take It Easy',
 							lyrics: [
-								`Come on, baby,`,
+								`Come on baby,`,
 								`Don't say maybe,`,
 								`I gotta know if`,
 								`your sweet love`,
@@ -354,7 +349,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:4yugZvBYaoREkJKtbG08Qr',
 							geniusLink: 'https://genius.com/Eagles-take-it-easy-lyrics',
 							year: 1972,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Desperado',
@@ -370,13 +365,13 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:2TjnCxxQRYn56Ye8gkUKiW',
 							geniusLink: 'https://genius.com/Eagles-desperado-lyrics',
 							year: 1973,
-							skip: true
+							skip: false
 						},
 					]),
 					{
 						rank: Rank.six,
 						suit: Suit.spades,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Tom Petty'],
 							song: `Runnin' Down A Dream`,
@@ -395,7 +390,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.six,
 						suit: Suit.clubs,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Tom Petty'],
 							song: `Free Fallin'`,
@@ -416,7 +411,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.six,
 						suit: Suit.hearts,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Tom Petty', 'and the Heartbreakers'],
 							song: `Mary Jane's Last Dance`,
@@ -440,7 +435,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.six,
 						suit: Suit.diamonds,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Tom Petty', 'and the Heartbreakers'],
 							song: 'American Girl',
@@ -467,14 +462,14 @@ export async function processSpotify(): Promise<void> {
 								`thousand hearts`,
 								`before I met you,`,
 								`I'll break a`,
-								`thousand more,`,
+								`thousand more`,
 								`baby, before`,
 								`I am through`
 							],
 							spotifyUri: 'spotify:track:6s0NHplywwr1IjnQpUpWJk',
 							geniusLink: 'https://genius.com/George-thorogood-and-the-destroyers-bad-to-the-bone-lyrics',
 							year: 1982,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Who Do You Love?',
@@ -491,7 +486,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6EMImSrB2kkbz0ZHtMa7zj',
 							geniusLink: 'https://genius.com/George-thorogood-and-the-destroyers-who-do-you-love-lyrics',
 							year: 1978,
-							skip: true,
+							skip: false,
 						},
 						{
 							song: 'Move It On Over',
@@ -507,7 +502,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:2bgsFbiStgVqxOtQ4UK3Uf',
 							geniusLink: 'https://genius.com/George-thorogood-and-the-destroyers-move-it-on-over-lyrics',
 							year: 1978,
-							skip: true,
+							skip: false,
 						},
 						{
 							song: 'One Bourbon, One Scotch, One Beer',
@@ -523,16 +518,16 @@ export async function processSpotify(): Promise<void> {
 							lyricsSizeFactor: FontSize.smaller,
 							spotifyUri: 'spotify:track:0s995gCthqnYJCWGvfKpNt',
 							geniusLink: 'https://genius.com/George-thorogood-and-the-destroyers-one-bourbon-one-scotch-one-beer-lyrics',
-							year: 1972,
-							skip: true
+							year: 1977,
+							skip: false
 						}
 					]),
 					...createForArtist(Rank.eight, ['The Rolling Stones'], [
 						{
 							song: 'Gimme Shelter',
 							lyrics: [
-								`Oh, a storm is`,
-								`threatening,`,
+								`Oh a storm is`,
+								`threatening`,
 								`My very life today,`,
 								`If I don't get`,
 								`some shelter,`,
@@ -542,13 +537,13 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6H3kDe7CGoWYBabAeVWGiD',
 							geniusLink: 'https://genius.com/The-rolling-stones-gimme-shelter-lyrics',
 							year: 1969,
-							skip: true
+							skip: false
 						},
 						{
 							song: `(I Can't Get No) Satisfaction`,
 							lyrics: [
 								`When I'm`,
-								`watching my TV,`,
+								`watching my TV`,
 								`And a man comes`,
 								`on and tells me`,
 								`how white my`,
@@ -558,12 +553,12 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:2PzU4IB8Dr6mxV3lHuaG34',
 							geniusLink: 'https://genius.com/The-rolling-stones-i-cant-get-no-satisfaction-lyrics',
 							year: 1965,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Miss You',
 							lyrics: [
-								`"Hey, what's the`,
+								`"Hey what's the`,
 								`matter, man?`,
 								`We're gon' come`,
 								`around at twelve`,
@@ -575,14 +570,14 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:3hJLKtTpgct9Y9wKww0BiR',
 							geniusLink: 'https://genius.com/The-rolling-stones-miss-you-lyrics',
 							year: 1978,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Paint It, Black',
 							lyrics: [
 								`If I look hard`,
 								`enough into the`,
-								`setting sun,`,
+								`setting sun`,
 								`My love will`,
 								`laugh with me`,
 								`before the`,
@@ -592,7 +587,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:63T7DJ1AFDD6Bn8VzG6JE8',
 							geniusLink: 'https://genius.com/The-rolling-stones-paint-it-black-lyrics',
 							year: 1966,
-							skip: true
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.nine, ['Billy Joel'], [
@@ -607,7 +602,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:0J0eyUFhkW1bIu0TWPcJhV',
 							geniusLink: 'https://genius.com/Billy-joel-movin-out-anthonys-song-lyrics',
 							year: 1977,
-							skip: true
+							skip: false
 						},
 						{
 							song: `The Downeaster 'Alexa'`,
@@ -615,7 +610,7 @@ export async function processSpotify(): Promise<void> {
 								`They say`,
 								`these waters`,
 								`aren't what`,
-								`they used to be,`,
+								`they used to be`,
 								`But I got people`,
 								`back on land`,
 								`who count on me`,
@@ -623,13 +618,13 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:39cFQHfY6tsdMRmSbFse3X',
 							geniusLink: 'https://genius.com/Billy-joel-the-downeaster-alexa-lyrics',
 							year: 1989,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'You May Be Right',
 							lyrics: [
 								`If I'm crazy`,
-								`then it's true,`,
+								`then it's true`,
 								`That it's all`,
 								`because of you,`,
 								`And you wouldn't`,
@@ -639,7 +634,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:7gMOe0gXYcELUoVugfMmHP',
 							geniusLink: 'https://genius.com/Billy-joel-you-may-be-right-lyrics',
 							year: 1980,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'The Ballad Of Billy The Kid',
@@ -656,7 +651,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:31RKj9kULWI2lM4tYSvAmb',
 							geniusLink: 'https://genius.com/Billy-joel-the-ballad-of-billy-the-kid-lyrics',
 							year: 1973,
-							skip: true
+							skip: false
 						},
 					]),
 					...createForArtist(Rank.ten, ['The Who'], [
@@ -675,7 +670,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6LbbHFEajG9e4m0G3L47c4',
 							geniusLink: 'https://genius.com/The-who-pinball-wizard-lyrics',
 							year: 1969,
-							skip: true
+							skip: false
 						},
 						{
 							song: `Baba O'Riley`,
@@ -691,7 +686,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:3qiyyUfYe7CRYLucrPmulD',
 							geniusLink: 'https://genius.com/The-who-baba-oriley-lyrics',
 							year: 1971,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Behind Blue Eyes',
@@ -706,7 +701,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:0cKk8BKEi7zXbdrYdyqBP5',
 							geniusLink: 'https://genius.com/The-who-behind-blue-eyes-lyrics',
 							year: 1971,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Who Are You',
@@ -723,7 +718,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:23IJ5wLRhEZ9DOuia5mPiZ',
 							geniusLink: 'https://genius.com/The-who-who-are-you-lyrics',
 							year: 1978,
-							skip: true
+							skip: false
 						}
 					]),
 					...createForArtist(Rank.jack, ['Led Zeppelin'], [
@@ -741,7 +736,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:78lgmZwycJ3nzsdgmPPGNx',
 							geniusLink: 'https://genius.com/Led-zeppelin-immigrant-song-lyrics',
 							year: 1970,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Dazed and Confused',
@@ -757,7 +752,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:1RIsAtnYOlo8zGMycNFioq',
 							geniusLink: 'https://genius.com/Led-zeppelin-dazed-and-confused-lyrics',
 							year: 1969,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Over the Hills and Far Away',
@@ -774,7 +769,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:35XlkvHy9WHPI4Tf9eax4t',
 							geniusLink: 'https://genius.com/Led-zeppelin-over-the-hills-and-far-away-lyrics',
 							year: 1973,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Kashmir',
@@ -792,7 +787,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:2nVHqZbOGkKWzlcy1aMbE7',
 							geniusLink: 'https://genius.com/Led-zeppelin-kashmir-lyrics',
 							year: 1975,
-							skip: true
+							skip: false
 						}
 					]),
 					...createForArtist(Rank.queen, ['Queen'], [
@@ -811,7 +806,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6cFZ4PLC19taNlpl9pbGMf',
 							geniusLink: 'https://genius.com/Queen-somebody-to-love-lyrics',
 							year: 1976,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Bohemian Rhapsody',
@@ -828,7 +823,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:7tFiyTwD0nx5a1eklYtX2J',
 							geniusLink: 'https://genius.com/Queen-bohemian-rhapsody-lyrics',
 							year: 1975,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Another One Bites The Dust',
@@ -847,7 +842,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:57JVGBtBLCfHw2muk5416J',
 							geniusLink: 'https://genius.com/Queen-another-one-bites-the-dust-lyrics',
 							year: 1980,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'We Are The Champions',
@@ -857,13 +852,13 @@ export async function processSpotify(): Promise<void> {
 								`I've had my`,
 								`share of sand`,
 								`kicked in my`,
-								`face, and I've`,
+								`face and I've`,
 								`come through`
 							],
 							spotifyUri: 'spotify:track:7ccI9cStQbQdystvc6TvxD',
 							geniusLink: 'https://genius.com/Queen-we-are-the-champions-lyrics',
 							year: 1977,
-							skip: true
+							skip: false
 						}
 					]),
 					...createForArtist(Rank.king, ['The Moody Blues'], [
@@ -882,7 +877,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6L5BZEcZmD6RBJnimzlyKr',
 							geniusLink: 'https://genius.com/The-moody-blues-nights-in-white-satin-lyrics',
 							year: 1967,
-							skip: true
+							skip: false
 						},
 						{
 							song: `I'm Just A Singer (In A Rock And Roll Band)`,
@@ -899,7 +894,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:7sXbG2xdtX18rHoXcGosFI',
 							geniusLink: 'https://genius.com/The-moody-blues-im-just-a-singer-in-a-rocknroll-band-lyrics',
 							year: 1972,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Your Wildest Dreams',
@@ -914,7 +909,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:1T4iwEA2ySieXjWxjiMVWs',
 							geniusLink: 'https://genius.com/The-moody-blues-your-wildest-dreams-lyrics',
 							year: 1986,
-							skip: true
+							skip: false
 						},
 						{
 							song: 'Melancholy Man',
@@ -922,7 +917,7 @@ export async function processSpotify(): Promise<void> {
 								`His life caught`,
 								`up in misery,`,
 								`He doesn't think`,
-								`like you and me,`,
+								`like you and me`,
 								`'Cause he can't see`,
 								`what you and I`,
 								`can see`
@@ -930,13 +925,13 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:1NeQzAqahRYI09bgLbhVFN',
 							geniusLink: 'https://genius.com/The-moody-blues-melancholy-man-lyrics',
 							year: 1970,
-							skip: true
+							skip: false
 						}
 					]),
 					{
 						rank: Rank.joker1,
 						suit: Suit.none,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Boston'],
 							song: `Rock n' Roll Band`,
@@ -960,7 +955,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.joker2,
 						suit: Suit.none,
-						skip: true,
+						skip: false,
 						design: {
 							artistLines: ['Boston'],
 							song: 'Foreplay / Long Time',
