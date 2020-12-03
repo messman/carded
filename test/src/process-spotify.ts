@@ -9,7 +9,7 @@ export enum FontSize {
 
 export async function processSpotify(): Promise<void> {
 	const options: Options<SpotifyCardDesign> = {
-		isDevelopment: true,
+		isDevelopment: false,
 		decks: [
 			{
 				/*
@@ -19,7 +19,7 @@ export async function processSpotify(): Promise<void> {
 					Four: The Doobie Brothers
 					Five: Eagles
 					Six: Tom Petty and the Heartbreakers
-					Seven: George Thorogood & The Destroyers
+					Seven: George Thorogood and the Destroyers
 					Eight: The Rolling Stones
 					Nine: Billy Joel
 					Ten: The Who
@@ -48,7 +48,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:24NwBd5vZ2CK8VOQVnqdxr',
 							geniusLink: 'https://genius.com/Aerosmith-sweet-emotion-lyrics',
 							year: 1975,
-							skip: true
+							skip: false
 						},
 						{
 							song: `Cryin'`,
@@ -115,7 +115,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:6hTcuIQa0sxrrByu9wTD7s',
 							geniusLink: 'https://genius.com/Bruce-springsteen-born-to-run-lyrics',
 							year: 1975,
-							skip: false
+							skip: true
 						},
 						{
 							song: 'Born in the U.S.A.',
@@ -183,7 +183,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:4xh7W7tlNMIczFhupCPniY',
 							geniusLink: 'https://genius.com/Fleetwood-mac-go-your-own-way-lyrics',
 							year: 1977,
-							skip: false
+							skip: true
 						},
 						{
 							song: 'Dreams',
@@ -233,7 +233,7 @@ export async function processSpotify(): Promise<void> {
 							spotifyUri: 'spotify:track:5J0aNEUTxJWKXnQmyY3vUp',
 							geniusLink: 'https://genius.com/Fleetwood-mac-gypsy-lyrics',
 							year: 1982,
-							skip: false
+							skip: true
 						},
 					]),
 					...createForArtist(Rank.four, ['The Doobie Brothers'], [
@@ -416,7 +416,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.six,
 						suit: Suit.hearts,
-						skip: false,
+						skip: true,
 						design: {
 							artistLines: ['Tom Petty', 'and the Heartbreakers'],
 							song: `Mary Jane's Last Dance`,
@@ -936,7 +936,7 @@ export async function processSpotify(): Promise<void> {
 					{
 						rank: Rank.joker1,
 						suit: Suit.none,
-						skip: false,
+						skip: true,
 						design: {
 							artistLines: ['Boston'],
 							song: `Rock n' Roll Band`,

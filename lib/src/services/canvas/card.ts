@@ -121,9 +121,9 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 	}
 
 	function drawRankAndSuit() {
-		drawImageWithColor(ctx, rankIconImage, suitFillColor, rankOffsetX, rankOffsetY, scaledRankWidth, scaledRankHeight);
+		drawImageWithColor(ctx, false, rankIconImage, suitFillColor, rankOffsetX, rankOffsetY, scaledRankWidth, scaledRankHeight);
 		if (suitIconImage) {
-			drawImageWithColor(ctx, suitIconImage, suitFillColor, suitOffsetX, suitOffsetY, scaledSuitWidth, scaledSuitHeight);
+			drawImageWithColor(ctx, false, suitIconImage, suitFillColor, suitOffsetX, suitOffsetY, scaledSuitWidth, scaledSuitHeight);
 		}
 	}
 

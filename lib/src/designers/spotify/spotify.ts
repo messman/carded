@@ -1,6 +1,6 @@
 import { drawImageWithColor, setFont } from '@/services/canvas/canvas';
 import { cardConstants, getSuitFillColor } from '@/services/canvas/card';
-import { loadSampleSpotifyCode } from '@/services/spotify/spotify';
+import { loadSampleSpotifyCode, loadSpotifyCode } from '@/services/spotify/spotify';
 import { CanvasRenderingContext2D, Image, loadImage } from 'canvas';
 import { CardDesign, CardDesigner, CardOutputStatus } from '../../options/models/models';
 
@@ -63,10 +63,10 @@ export const spotifyCardDesigner: SpotifyCardDesigner = {
 			// Draw Frame
 			const scaledFrameOffsetY = scaleFactor * frameOffsetY;
 			const frameImage = await loadImage(Buffer.from(frame, 'utf-8'));
-			drawImageWithColor(ctx, frameImage, color, areaX, areaY - scaledFrameOffsetY, scaledArtWidth, scaledArtHeight + scaledFrameOffsetY);
+			drawImageWithColor(ctx, false, frameImage, color, areaX, areaY - scaledFrameOffsetY, scaledArtWidth, scaledArtHeight + scaledFrameOffsetY);
 		}
 
-		const { lyrics, lyricsSizeFactor, year, artistLines } = design;
+		const { lyrics, lyricsSizeFactor, year, artistLines, spotifyUri } = design;
 
 		drawYearAndArtist(ctx, color, year, artistLines, areaX, areaY, scaledArtWidth, scaledArtHeight);
 
@@ -100,10 +100,25 @@ export const spotifyCardDesigner: SpotifyCardDesigner = {
 			if (isDevelopment) {
 				spotifyCode = await loadSampleSpotifyCode();
 			}
+			else {
+				try {
+					spotifyCode = await loadSpotifyCode({
+						width: scaledArtWidth,
+						spotifyUri: spotifyUri
+					});
+				}
+				catch (e) {
+					console.log(e);
+					return {
+						...card,
+						outputStatus: CardOutputStatus.error
+					};
+				}
+			}
 
 			if (spotifyCode) {
 				ctx.save();
-				drawImageWithColor(ctx, spotifyCode, color, areaX, areaY + scaledArtHeight - codeHeight, scaledArtWidth, codeHeight);
+				drawImageWithColor(ctx, !isDevelopment, spotifyCode, color, areaX, areaY + scaledArtHeight - codeHeight, scaledArtWidth, codeHeight);
 				ctx.restore();
 			}
 
