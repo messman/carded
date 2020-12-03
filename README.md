@@ -8,8 +8,16 @@ Used to create gift playing card sets.
 ## Process
 
 1. Specify what should go on each card in a config file (rank, suit, song lyric, artist, year, spotify URI).
-2. Use `canvas` to render onto a temporary canvas.
+2. Use the spotify codes API to get a code for the song from the URI. Use `canvas` library to render onto a temporary canvas.
 3. Export that canvas as an image of the correct size.
-4. (Cache config file to make changes faster.)
+4. (Future: cache config file to make changes faster.)
 5. Manually upload result images to a site like [makeplayingcards.com](https://www.makeplayingcards.com/) to create a deck of cards.
 
+## Credits
+
+Most icons come from The Noun Project, for which I have a full paid license.
+Designs are from Sketch on macOS. 
+
+## Example
+
+![Example](example/example.png)
