@@ -5,17 +5,15 @@
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
 	"scripts": {
-		"build": "ts-webpack-builder configFile=tswb.js",
-		"build-production": "npm run clean && ts-webpack-builder configFile=tswb.js --isDevelopment=false",
-		"clean": "trash dist/*"
+		"start": "node ./dist/index",
+		"build": "npm run clean && tsc",
+		"build-start": "npm run build && npm start",
+		"clean": "trash dist/* && trash out/*"
 	},
 	"author": "Andrew Messier",
 	"license": "MIT",
 	"devDependencies": {
-		"@messman/ts-webpack-builder": "^2.3.0",
-		"raw-loader": "^4.0.2",
-		"svgo": "^3.0.1",
-		"svgo-loader": "^3.0.3",
+		"@types/node": "^18.11.9",
 		"trash-cli": "^5.0.0",
 		"typescript": "^4.8.4"
 	},

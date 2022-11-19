@@ -1,6 +1,25 @@
 {
-	"extends": "../tsconfig-base.json",
 	"compilerOptions": {
+		"module": "esnext",
+		"moduleResolution": "node",
+		"lib": [
+			"ES2021"
+		],
+		"target": "ES2021",
+		"sourceMap": true,
+		"declaration": true,
+		"declarationMap": true,
+		"incremental": true,
+		"allowJs": false,
+		"checkJs": false,
+		"alwaysStrict": true,
+		"strict": true,
+		"noImplicitReturns": true,
+		"noUnusedLocals": true,
+		"noUnusedParameters": true,
+		"noFallthroughCasesInSwitch": true,
+		"noEmitOnError": true,
+		"preserveConstEnums": true,
 		"outDir": "./dist",
 		"baseUrl": ".",
 		"paths": {
