@@ -1,9 +1,7 @@
 import { log } from './services/log/log';
 
-export * from './process';
-export * from './options/models/models';
-export * from './designers/empty';
-export * from './designers/spotify/spotify';
+export * from './services/';
+export * from './models';
 
 export function test(): boolean {
 	log('Test');

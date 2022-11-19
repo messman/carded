@@ -21,8 +21,7 @@ To read a Spotify barcode, open your Spotify app, go to search, and tap into the
 
 ## Credits
 
-Most icons come from The Noun Project, for which I have a full paid license.
-Designs are from Sketch on macOS. 
+Most icons come from The Noun Project, for which I have a full paid license. Other designs are self-made.
 
 ## Example
 
