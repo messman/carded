@@ -1,20 +1,8 @@
 import { Canvas, CanvasRenderingContext2D } from 'canvas';
 
-export interface Options<CD extends CardDesign> {
-	isDevelopment?: boolean;
-	decks: Deck<CD>[];
-	designer: CardDesigner<CD> | null;
-}
-
-export interface Deck<CD extends CardDesign> {
-	outputAbsoluteDirectory: string;
-	outputDeckPrefix: string;
-	cards: Card<CD>[];
-}
+//#region Card Basics
 
 export enum Rank {
-	joker1,
-	joker2,
 	ace,
 	two,
 	three,
@@ -31,47 +19,83 @@ export enum Rank {
 }
 
 export enum Suit {
-	none,
 	spades,
 	clubs,
 	hearts,
 	diamonds
 }
 
-export interface RankSuit {
+export enum SpecialRank {
+	joker1,
+	joker2,
+}
+
+export interface CardMarkWithSuit {
 	rank: Rank;
 	suit: Suit;
-	skip?: boolean;
 }
 
-export interface Card<CD extends CardDesign> extends RankSuit {
-	design: CD;
+export interface CardMarkSpecialRank {
+	specialRank: SpecialRank;
 }
 
-export interface CardDesign {
-	debug?: string;
+export function isCardMarkSpecialRank(value: CardMark | null | undefined): value is CardMarkSpecialRank {
+	return !!value && (value as CardMarkSpecialRank).specialRank !== undefined;
 }
 
-export interface ProcessCardInput<CD extends CardDesign> {
-	options: Options<CD>;
-	deck: Deck<CD>;
-	card: Card<CD>;
+export type CardMark = CardMarkWithSuit | CardMarkSpecialRank;
+
+//#endregion
+
+export interface ProcessInput<TDesigner, TCardDesign> {
+	meta: ProcessInputMeta;
+	design: ProcessInputDesign<TDesigner, TCardDesign>;
+}
+
+export interface ProcessInputMeta {
+	isDebug: boolean;
+	/** Absolute. */
+	outputDirectory: string;
+	stopOnError: boolean;
+}
+
+export interface ProcessInputDesign<TDesigner, TCardDesign> {
+	name: string;
+	drawCardFunc: CardDesignerDrawCard<TDesigner, TCardDesign>;
+	designerInput: TDesigner;
+	outputPrefix: string;
+	cards: Card<TCardDesign>[];
+}
+
+export interface Card<TCardDesign> {
+	mark: CardMark;
+	skip: boolean;
+	design: TCardDesign;
+}
+
+export type CardDesignerDrawCard<TDesigner, TCardDesign> = (input: DrawCardInput<TDesigner, TCardDesign>) => Promise<DrawCardOutput>;
+
+export interface DrawCardInput<TDesigner, TCardDesign> {
+	input: ProcessInput<TDesigner, TCardDesign>;
+	index: number;
+	card: Card<TCardDesign>;
 	canvas: Canvas;
 	context: CanvasRenderingContext2D;
 }
 
-export interface CardDesigner<CD extends CardDesign> {
-	processCard(input: ProcessCardInput<CD>): Promise<ProcessCardOutput<CD>>;
+export interface ProcessOutput {
+	cards: DrawCardOutput[];
 }
 
-export enum CardOutputStatus {
+export interface DrawCardOutput {
+	mark: CardMark;
+	outputStatus: DrawCardOutputStatus;
+	outputStatusMessage: string | null;
+}
+
+export enum DrawCardOutputStatus {
 	ok,
 	duplicate,
 	skipped,
 	error
-}
-
-export interface ProcessCardOutput<CD extends CardDesign> extends Card<CD> {
-	outputStatus: CardOutputStatus;
-	outputStatusMessage?: string | null;
 }

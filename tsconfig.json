@@ -1,11 +1,11 @@
 {
 	"compilerOptions": {
-		"module": "esnext",
+		"module": "CommonJS",
 		"moduleResolution": "node",
 		"lib": [
 			"ES2021"
 		],
-		"target": "ES2021",
+		"target": "ESNext",
 		"sourceMap": true,
 		"declaration": true,
 		"declarationMap": true,
@@ -20,13 +20,8 @@
 		"noFallthroughCasesInSwitch": true,
 		"noEmitOnError": true,
 		"preserveConstEnums": true,
-		"outDir": "./dist",
-		"baseUrl": ".",
-		"paths": {
-			"@/*": [
-				"src/*"
-			]
-		}
+		"outDir": "./src",
+		"skipLibCheck": true
 	},
 	"include": [
 		"src/**/*"

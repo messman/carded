@@ -1,33 +1,31 @@
 import { CanvasRenderingContext2D, Image, loadImage } from 'canvas';
+import { Card, CardMark, isCardMarkSpecialRank, Rank, Suit } from '../../models';
+import { loadAsStringFromSrc } from '../file/file';
 import { drawImageWithColor } from './canvas';
-import { Card, Rank, Suit } from '../../options/models/models';
 
 const suitIcons: Record<keyof typeof Suit, string> = {
-	none: '',
-	clubs: require('@/static/icons/suit-club.svg').default as string,
-	diamonds: require('@/static/icons/suit-diamond.svg').default as string,
-	hearts: require('@/static/icons/suit-heart.svg').default as string,
-	spades: require('@/static/icons/suit-spade.svg').default as string,
+	clubs: loadAsStringFromSrc('./designs/2020-dad/static/icons/suit-club.svg'),
+	diamonds: loadAsStringFromSrc('./designs/2020-dad/static/icons/suit-diamond.svg'),
+	hearts: loadAsStringFromSrc('./designs/2020-dad/static/icons/suit-heart.svg'),
+	spades: loadAsStringFromSrc('./designs/2020-dad/static/icons/suit-spade.svg'),
 };
 
-const jokerIconString = require('@/static/icons/rank-joker.svg').default as string;
+const jokerIconString = loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-joker.svg',);
 
 const rankIcons: Record<keyof typeof Rank, string> = {
-	joker1: jokerIconString,
-	joker2: jokerIconString,
-	ace: require('@/static/icons/rank-ace.svg').default as string,
-	two: require('@/static/icons/rank-two.svg').default as string,
-	three: require('@/static/icons/rank-three.svg').default as string,
-	four: require('@/static/icons/rank-four.svg').default as string,
-	five: require('@/static/icons/rank-five.svg').default as string,
-	six: require('@/static/icons/rank-six.svg').default as string,
-	seven: require('@/static/icons/rank-seven.svg').default as string,
-	eight: require('@/static/icons/rank-eight.svg').default as string,
-	nine: require('@/static/icons/rank-nine.svg').default as string,
-	ten: require('@/static/icons/rank-ten.svg').default as string,
-	jack: require('@/static/icons/rank-jack.svg').default as string,
-	queen: require('@/static/icons/rank-queen.svg').default as string,
-	king: require('@/static/icons/rank-king.svg').default as string
+	ace: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-ace.svg'),
+	two: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-two.svg'),
+	three: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-three.svg'),
+	four: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-four.svg'),
+	five: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-five.svg'),
+	six: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-six.svg'),
+	seven: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-seven.svg'),
+	eight: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-eight.svg'),
+	nine: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-nine.svg'),
+	ten: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-ten.svg'),
+	jack: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-jack.svg'),
+	queen: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-queen.svg'),
+	king: loadAsStringFromSrc('./designs/2020-dad/static/icons/rank-king.svg')
 };
 
 // 300 DPI, 2.74 by 3.74
@@ -64,7 +62,7 @@ export const cardConstants = {
 };
 
 export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx: CanvasRenderingContext2D): Promise<void> {
-	const { rank, suit } = card;
+	const { mark } = card;
 	const { scaleFactor, suitHeightOffset, rankHeightOffset, rankWidth, suitWidth, backgroundColor, fullArea, designArea, cutArea, jokerRankHeight, rankHeight, suitHeight } = cardConstants;
 
 	const scaledFullWidth = fullArea.width * scaleFactor;
@@ -95,24 +93,32 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 	}
 
 	// Get either red or black color.
-	const suitFillColor = getSuitFillColor(suit);
+	const suitFillColor = getSuitFillColor(mark);
 
 	// Compute all the rank positioning and size.
-	const rankIcon = rankIcons[Rank[rank] as keyof typeof Rank];
-	const rankIconImage = await loadImage(Buffer.from(rankIcon, 'utf-8'));
+	let rankIconImage: Image;
 	const rankOffsetX = designOffsetX;
 	const rankOffsetY = designOffsetY + (rankHeightOffset * scaleFactor);
 	const scaledRankWidth = rankWidth * scaleFactor;
-	const scaledRankHeight = ((rank === Rank.joker1 || rank === Rank.joker2) ? jokerRankHeight : rankHeight) * scaleFactor;
+	let scaledRankHeight: number;
 
 	// Compute all the suit positioning and size.
-	const suitIcon = suitIcons[Suit[suit] as keyof typeof Suit];
 	let suitIconImage: Image | null = null;
-	let suitOffsetX: number = 0;
-	let suitOffsetY: number = 0;
 	const scaledSuitWidth = suitWidth * scaleFactor;
 	const scaledSuitHeight = suitHeight * scaleFactor;
-	if (suitIcon) {
+	let suitOffsetX: number = 0;
+	let suitOffsetY: number = 0;
+
+	if (isCardMarkSpecialRank(mark)) {
+		rankIconImage = await loadImage(Buffer.from(jokerIconString, 'utf-8'));
+		scaledRankHeight = jokerRankHeight * scaleFactor;
+	}
+	else {
+		const rankIcon = rankIcons[Rank[mark.rank] as keyof typeof Rank];
+		rankIconImage = await loadImage(Buffer.from(rankIcon, 'utf-8'));
+		const scaledRankHeight = rankHeight * scaleFactor;
+
+		const suitIcon = suitIcons[Suit[mark.suit] as keyof typeof Suit];
 		suitIconImage = await loadImage(Buffer.from(suitIcon, 'utf-8'));
 		// Suit may be a different size. Make sure it is still centered beneath rank.
 		const rankToSuitOffset = (scaledRankWidth - scaledSuitWidth) / 2;
@@ -139,7 +145,10 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 	ctx.restore();
 }
 
-export function getSuitFillColor(suit: Suit): string {
+export function getSuitFillColor(mark: CardMark): string {
 	// If suit is none, use black (for joker).
-	return (suit === Suit.diamonds || suit === Suit.hearts) ? cardConstants.redColor : cardConstants.blackColor;
+	if (isCardMarkSpecialRank(mark)) {
+		return cardConstants.blackColor;
+	}
+	return (mark.suit === Suit.diamonds || mark.suit === Suit.hearts) ? cardConstants.redColor : cardConstants.blackColor;
 }

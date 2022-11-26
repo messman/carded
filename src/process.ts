@@ -1,72 +1,96 @@
-import { emptyCardDesigner } from './designers/empty';
-import { CardDesign, CardDesigner, ProcessCardOutput, Options, Deck, Card, Rank, Suit, CardOutputStatus } from './options/models/models';
-import { create } from './services/canvas/canvas';
-import { log } from './services/log/log';
 import * as path from 'path';
-import { exportCanvasToPNG } from './services/export/export';
-import { drawBasicCard } from './services/canvas/card';
+import { Card, DrawCardOutput, DrawCardOutputStatus, isCardMarkSpecialRank, ProcessInput, ProcessOutput, Rank, SpecialRank, Suit } from './models';
+import { create } from './services/draw/canvas';
+import { drawBasicCard } from './services/draw/card';
+import { exportCanvasToPNG } from './services/file/export';
+import { log } from './services/log/log';
 
-export interface ProcessOutput<CD extends CardDesign = any> {
-	decks: ProcessCardOutput<CD>[][];
-}
+export async function process<T extends ProcessInput<any, any>>(input: T): Promise<ProcessOutput> {
+	const { design, meta } = input;
+	const { isDebug, stopOnError } = meta;
+	const { cards } = design;
 
-export async function process<CD extends CardDesign = any>(options: Options<CD>): Promise<ProcessOutput<CD>> {
-	const { isDevelopment, decks, designer } = options;
-
-	if (isDevelopment) {
-		log('process - dev mode');
+	if (isDebug) {
+		log('process - debug mode');
 	}
 
-	const cardDesigner = designer || (emptyCardDesigner as unknown as CardDesigner<CD>);
-	const deckOutputs: ProcessCardOutput<CD>[][] = [];
+	const cardOutputs: DrawCardOutput[] = [];
 
-	for (let i = 0; i < decks.length; i++) {
-		const deck = decks[i];
-		const deckOutput: ProcessCardOutput<CD>[] = [];
-		const { cards } = deck;
-		for (let j = 0; j < cards.length; j++) {
-			const card = cards[j];
-			const cardOutput = await processCard(cardDesigner, options, deck, card);
-			deckOutput.push(cardOutput);
+	for (let i = 0; i < cards.length; i++) {
+		const card = cards[i];
+		const cardOutput = await processCard(input, card, i);
+		cardOutputs.push(cardOutput);
+		if (cardOutput.outputStatus === DrawCardOutputStatus.error && stopOnError) {
+			log('Stopping on error');
 		}
-		deckOutputs.push(deckOutput);
 	}
+
+	logOutputs(cardOutputs);
 
 	return {
-		decks: deckOutputs
+		cards: cardOutputs
 	};
 }
 
-async function processCard<CD extends CardDesign>(designer: CardDesigner<CD>, options: Options<CD>, deck: Deck<CD>, card: Card<CD>): Promise<ProcessCardOutput<CD>> {
-	const { isDevelopment } = options;
-	const { outputDeckPrefix, outputAbsoluteDirectory } = deck;
-	const { rank, suit, skip } = card;
+async function processCard<TDesigner = any, TCardDesign = any>(input: ProcessInput<TDesigner, TCardDesign>, card: Card<TCardDesign>, index: number): Promise<DrawCardOutput> {
+	const { design, meta } = input;
+	const { isDebug, outputDirectory } = meta;
+	const { outputPrefix, drawCardFunc } = design;
+	const { mark, skip } = card;
 
 	if (skip) {
 		return Promise.resolve({
-			...card,
-			outputStatus: CardOutputStatus.skipped
+			mark,
+			outputStatus: DrawCardOutputStatus.skipped,
+			outputStatusMessage: null
 		});
 	}
 
 	const [canvas, ctx] = create();
 
-	drawBasicCard(!!isDevelopment, card, ctx);
+	drawBasicCard(!!isDebug, card, ctx);
 
-	const output = await designer.processCard({
-		options: options,
-		deck: deck,
-		card: card,
+	const output = await drawCardFunc({
+		input,
+		index,
+		card,
 		canvas: canvas,
 		context: ctx
 	});
 
-	if (output.outputStatus === CardOutputStatus.ok) {
-		const title = `${Rank[rank]}_${Suit[suit]}`;
-		const fileName = `${outputDeckPrefix}${title}.png`;
-		const outputFileName = path.join(outputAbsoluteDirectory, fileName);
+	if (output.outputStatus === DrawCardOutputStatus.ok) {
+		let title: string;
+		if (isCardMarkSpecialRank(mark)) {
+			title = SpecialRank[mark.specialRank];
+		}
+		else {
+			title = `${Rank[mark.rank]}_${Suit[mark.suit]}`;
+		}
+		const fileName = `${outputPrefix}-${title}.png`;
+		const outputFileName = path.join(outputDirectory, fileName);
 		await exportCanvasToPNG(canvas, outputFileName);
 	}
 
 	return output;
+}
+
+function logOutputs(deckOutput: DrawCardOutput[]): void {
+	const statuses: Record<keyof typeof DrawCardOutputStatus, DrawCardOutput[]> = {
+		ok: [],
+		duplicate: [],
+		error: [],
+		skipped: []
+	};
+
+	deckOutput.forEach((cardOutput) => {
+		statuses[DrawCardOutputStatus[cardOutput.outputStatus] as keyof typeof DrawCardOutputStatus].push(cardOutput);
+	});
+
+	const statusKeys = Object.keys(statuses);
+	statusKeys.forEach((statusKey) => {
+		const statusArray = statuses[statusKey as keyof typeof statuses];
+		if (statusArray.length) {
+			log(`> '${statusKey}': ${statusArray.length}`);
+		}
+	});
 }

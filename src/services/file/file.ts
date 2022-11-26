@@ -1,8 +1,7 @@
 import { Canvas } from 'canvas';
-import { log } from '../log/log';
-
 import * as fs from 'fs';
 import * as path from 'path';
+import { log } from '../log/log';
 
 async function ensureDirectory(filePath: string): Promise<void> {
 	const directory = path.dirname(filePath);
@@ -51,4 +50,14 @@ export async function exportCanvasToPNG(canvas: Canvas, outFile: string): Promis
 			reject(e);
 		});
 	});
+}
+
+const srcDirectoryFromThisFile = "../../";
+
+export function loadAsStringFromSrc(fileFromSrc: string): string {
+	return fs.readFileSync(path.join(__dirname, srcDirectoryFromThisFile, fileFromSrc), 'utf-8');
+}
+
+export function loadAsStringRelative(dirname: string, fileRelative: string): string {
+	return fs.readFileSync(path.join(dirname, fileRelative), 'utf-8');
 }

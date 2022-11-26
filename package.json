@@ -2,13 +2,15 @@
 	"name": "@messman/carded",
 	"version": "1.0.0",
 	"description": "A tool for creating poker-sized card deck templates with song lyrics and Spotify links.",
-	"main": "dist/index.js",
-	"types": "dist/index.d.ts",
+	"main": "start.js",
+	"types": "src/index.d.ts",
 	"scripts": {
-		"start": "node ./start.js",
-		"build": "npm run clean && tsc",
+		"start": "npm run clean-out && node ./start.js",
+		"build": "tsc",
 		"build-start": "npm run build && npm start",
-		"clean": "trash dist/* && trash out/*"
+		"build-analyze": "tsc --extendedDiagnostics",
+		"clean-out": "trash out/*",
+		"clean-src": "trash src/tsconfig.tsbuildinfo && trash src/**/*.js* && trash src/**/*.d.*"
 	},
 	"author": "Andrew Messier",
 	"license": "MIT",

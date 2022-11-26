@@ -1,9 +1,6 @@
-import { log } from './services/log/log';
+export * from './models/index';
 
-export * from './services/';
-export * from './models';
+export { process } from './process';
 
-export function test(): boolean {
-	log('Test');
-	return true;
-}
+export { dad2020Design } from './designs/2020-dad';
+export { testEmptyDesign } from './designs/test-empty';

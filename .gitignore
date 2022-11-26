@@ -1,26 +1,17 @@
 # root
 TODO.txt
 NOTES.txt
-deploy-*.txt
 
 node_modules
 dist
-dist-client
 build
-design
 npm-debug.log
 
-test/out
+out
 
-**/test/**/*.js
-**/test/**/*.js.map
-
-**/ts-build
-
-# Output of 'npm pack'
-*.tgz
+tsconfig.tsbuildinfo
+src/**/*.js*
+src/**/*.d.*
 
 # OS X temporary files
 .DS_Store
-
-settings.*.json

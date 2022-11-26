@@ -1,0 +1,10 @@
+{
+	"cSpell.words": [
+		"Aerosmith"
+	],
+	"typescript.preferences.importModuleSpecifier": "relative",
+	"files.exclude": {
+		"**/src/**/*.d.*": true,
+		"**/src/**/*.js*": true
+	}
+}

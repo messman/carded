@@ -1,4 +1,5 @@
-import { loadImage, Image } from 'canvas';
+import { Image, loadImage } from 'canvas';
+import { loadAsStringRelative } from '../file/file';
 
 export interface LoadSpotifyCodeInput {
 	width: number;
@@ -28,7 +29,7 @@ async function delaySeconds(seconds: number): Promise<void> {
 	});
 }
 
-const sampleCode = require('@/static/icons/sample-code.svg').default as string;
+const sampleCode = loadAsStringRelative(__dirname, './sample-code.svg');
 const sampleBuffer = Buffer.from(sampleCode, 'utf-8');
 export async function loadSampleSpotifyCode(): Promise<Image> {
 	return await loadImage(sampleBuffer);
