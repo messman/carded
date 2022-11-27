@@ -7,7 +7,7 @@ import { log } from './services/log/log';
 
 export async function process<T extends ProcessInput<any, any>>(input: T): Promise<ProcessOutput> {
 	const { design, meta } = input;
-	const { isDebug, stopOnError } = meta;
+	const { isDebug, stopOnError, maxCards } = meta;
 	const { cards } = design;
 
 	if (isDebug) {
@@ -17,6 +17,10 @@ export async function process<T extends ProcessInput<any, any>>(input: T): Promi
 	const cardOutputs: DrawCardOutput[] = [];
 
 	for (let i = 0; i < cards.length; i++) {
+		if (maxCards !== null && (i + 1) > maxCards) {
+			break;
+		}
+
 		const card = cards[i];
 		const cardOutput = await processCard(input, card, i);
 		cardOutputs.push(cardOutput);

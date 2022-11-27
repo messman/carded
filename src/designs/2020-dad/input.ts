@@ -981,7 +981,7 @@ function createForArtist(rank: Rank, artistLines: string[], designs: DesignWitho
 		return {
 			mark: {
 				rank,
-				suit: (index + 1) as Suit, // 0 is none,
+				suit: index as Suit,
 			},
 			skip: design.skip,
 			design: {

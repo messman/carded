@@ -1,7 +1,7 @@
 import { CanvasRenderingContext2D, Image, loadImage } from 'canvas';
 import { Card, CardMark, isCardMarkSpecialRank, Rank, Suit } from '../../models';
 import { loadAsStringFromSrc } from '../file/file';
-import { drawImageWithColor } from './canvas';
+import { drawImageWithColor, setFont } from './canvas';
 
 const suitIcons: Record<keyof typeof Suit, string> = {
 	clubs: loadAsStringFromSrc('./designs/2020-dad/static/icons/suit-club.svg'),
@@ -61,7 +61,11 @@ export const cardConstants = {
 	scaleFactor: 2,
 };
 
-export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx: CanvasRenderingContext2D): Promise<void> {
+const debugConstants = {
+	textHeight: 20
+};
+
+export async function drawBasicCard(isDebug: boolean, card: Card<any>, ctx: CanvasRenderingContext2D): Promise<void> {
 	const { mark } = card;
 	const { scaleFactor, suitHeightOffset, rankHeightOffset, rankWidth, suitWidth, backgroundColor, fullArea, designArea, cutArea, jokerRankHeight, rankHeight, suitHeight } = cardConstants;
 
@@ -78,18 +82,39 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 	const designOffsetX = (scaledFullWidth - scaledDesignWidth) / 2;
 	const designOffsetY = (scaledFullHeight - scaledDesignHeight) / 2;
 
-	if (isDevelopment) {
+	if (isDebug) {
 		// Draw design area line
-		ctx.strokeStyle = '#cccccc';
+		const designAreaStyle = '#cccccc';
+		ctx.strokeStyle = designAreaStyle;
 		ctx.strokeRect(designOffsetX, designOffsetY, scaledDesignWidth, scaledDesignHeight);
 
+		// Draw design area text
+		ctx.save();
+		ctx.fillStyle = designAreaStyle;
+		const debugTextHeight = scaleFactor * debugConstants.textHeight;
+		setFont(ctx, debugTextHeight, 'Arial');
+		ctx.textAlign = 'left';
+		ctx.textBaseline = 'top';
+		ctx.fillText('Design Safe Area', designOffsetX, designOffsetY + scaledDesignHeight);
+		ctx.restore();
+
 		// Draw cut area line
-		ctx.strokeStyle = '#000000';
+		const cutAreaStyle = '#000000';
+		ctx.strokeStyle = cutAreaStyle;
 		const scaledCutWidth = cutArea.width * scaleFactor;
 		const scaledCutHeight = cutArea.height * scaleFactor;
 		const cutOffsetX = (scaledFullWidth - scaledCutWidth) / 2;
 		const cutOffsetY = (scaledFullHeight - scaledCutHeight) / 2;
 		ctx.strokeRect(cutOffsetX, cutOffsetY, scaledCutWidth, scaledCutHeight);
+
+		// Draw design area text
+		ctx.save();
+		ctx.fillStyle = cutAreaStyle;
+		setFont(ctx, debugTextHeight, 'Arial');
+		ctx.textAlign = 'left';
+		ctx.textBaseline = 'top';
+		ctx.fillText('Cut Area', cutOffsetX, cutOffsetY + scaledCutHeight);
+		ctx.restore();
 	}
 
 	// Get either red or black color.
@@ -116,7 +141,7 @@ export async function drawBasicCard(isDevelopment: boolean, card: Card<any>, ctx
 	else {
 		const rankIcon = rankIcons[Rank[mark.rank] as keyof typeof Rank];
 		rankIconImage = await loadImage(Buffer.from(rankIcon, 'utf-8'));
-		const scaledRankHeight = rankHeight * scaleFactor;
+		scaledRankHeight = rankHeight * scaleFactor;
 
 		const suitIcon = suitIcons[Suit[mark.suit] as keyof typeof Suit];
 		suitIconImage = await loadImage(Buffer.from(suitIcon, 'utf-8'));

@@ -57,6 +57,7 @@ export interface ProcessInputMeta {
 	/** Absolute. */
 	outputDirectory: string;
 	stopOnError: boolean;
+	maxCards: number | null;
 }
 
 export interface ProcessInputDesign<TDesigner, TCardDesign> {
